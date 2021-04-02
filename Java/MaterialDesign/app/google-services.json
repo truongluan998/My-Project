@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "663811622972",
+    "project_id": "material-design-7576b",
+    "storage_bucket": "material-design-7576b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663811622972:android:36c7f9037e0e8423fbdb39",
+        "android_client_info": {
+          "package_name": "vn.aptech.materialdesign"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663811622972-n6i75iul8bb3jkgdd9jp35ntld66r22a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.aptech.materialdesign",
+            "certificate_hash": "33b154c17609006e32db52c617f3058fc0a5b87f"
+          }
+        },
+        {
+          "client_id": "663811622972-tg2h48r4c29nckb3be174clhu5er2qtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBau_p3bs3dYgjJBRxESER-kjc01MGdJXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663811622972-tg2h48r4c29nckb3be174clhu5er2qtr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

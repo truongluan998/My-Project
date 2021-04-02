@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "779192139582",
+    "project_id": "ecommerce-79f65",
+    "storage_bucket": "ecommerce-79f65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779192139582:android:5fd2f7c5ae3e93c9a2366f",
+        "android_client_info": {
+          "package_name": "vn.aptech.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779192139582-kdi2k95erlika7n47705ikb790tfmnc9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.aptech.ecommerce",
+            "certificate_hash": "33b154c17609006e32db52c617f3058fc0a5b87f"
+          }
+        },
+        {
+          "client_id": "779192139582-ep5isr3175ksm4btqqf30dk9nu9oj2m5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr84pUE0X23Pl-nJK5YS_tU6nwXASCXds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779192139582-ep5isr3175ksm4btqqf30dk9nu9oj2m5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
