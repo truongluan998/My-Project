@@ -25,14 +25,19 @@
 
     <string name="sign_in_description_text">Enter email id and password, to sign in with us.</string>
 
-<!--    Dialog-->
+    <!--    Dialog-->
     <string name="please_click_back_again_to_exit">Please click back again to exit</string>
     <string name="please_wait">Please Wait&#8230;</string>
 
 
-<!--    Drawer Navigation-->
+    <!--    Drawer Navigation-->
     <string name="nav_my_profile">My Profile</string>
     <string name="nav_sign_out">Sign Out</string>
 
+
+<!--    My Profile-->
+    <string name="mobile">Mobile</string>
+    <string name="update">UPDATE</string>
+    <string name="my_profile_title">My Profile</string>
 
 </resources>
