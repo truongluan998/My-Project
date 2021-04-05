@@ -1,0 +1,149 @@
+/* Chart */
+.first {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    background-color: #fff;
+    padding-bottom: 2rem;
+    padding-top: 30px
+}
+
+.chart{
+    width: 1000px;
+    height: 400px;
+    display: block;
+    background: #ECECEC;
+    padding-left: 70px;
+    padding-top: 25px;
+
+
+}
+
+.numbers {
+    color: #000;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: inline-block;
+    padding-top: 0;
+
+}
+
+.numbers li {
+    list-style: none;
+    height: 50px;
+    position: relative;
+    bottom: 18px;
+    padding-right: 20px;
+
+}
+
+.numbers span {
+    font-size: 12px;
+    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.bars {
+    color: #000;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 800px;
+    height: 250px;
+    border-bottom: solid 1px;
+    border-left: solid 1px;
+    margin-bottom: 18px;
+
+}
+
+.bars li {
+    display: table-cell;
+    width: 110px;
+    height: 250px;
+    position: relative;
+    border-bottom: solid 1px #333;
+}
+
+.bars span {
+    width: 100%;
+    position: absolute;
+    bottom: -20px;
+    text-align: center;
+}
+
+.bars .bar {
+    display: block;
+    background: #8CC63F;
+    width: 20px;
+    position: absolute;
+    bottom: 0;
+    margin-left: 45px;
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(105, 156, 02, 0.5);
+    transform: 0.5s;
+    transition-property: background, box-shadow;
+}
+
+.bars .bar:hover {
+    background: #4AAF10;
+    box-shadow: 0 0 10px 0 rgba(107, 231, 49, 0.5);
+    cursor: pointer;
+}
+
+.bars .bar:before {
+    color: #000;
+    content: attr(data-percentage);
+    position: relative;
+    bottom: 20px;
+}
+
+.chart .bars {
+        margin-top: 60px ;
+
+}
+
+.report {
+    display: contents;
+}
+
+.chart .report-d {
+    margin-right: 15px;
+    float: right;
+    background: #8CC63F;
+    margin: 0;
+    border-radius: 5px;
+}
+
+#cars {
+    background: #8CC63F;
+    border: 0;
+}
+
+/* card */
+.card {
+    width: 13rem;
+    height: 7rem;
+}
+
+.r-card {
+        padding-bottom: 1rem;
+}
+
+.card .card-title {
+    font-size: 2.5rem;
+    text-align: right;
+}
+
+.row-card {
+    padding-bottom: 30px;
+}
+
+

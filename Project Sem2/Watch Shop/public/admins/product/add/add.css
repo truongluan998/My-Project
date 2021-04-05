@@ -1,0 +1,14 @@
+.image_detail_product {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.container_image_detail {
+    margin-top: 20px;
+}
+
+.image_feature_product {
+      width: 100px;
+    height: 100px;
+    object-fit: cover;
+}

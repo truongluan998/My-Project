@@ -1,0 +1,99 @@
+@extends('admin.layout.admin')
+
+@section('title')
+<title>Edit Roles</title>
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('admins/role/add/add.css')}}">
+@endsection
+
+
+@section('js')
+    <script src="{{ asset('admins/role/add/add.js')}}">
+
+    </script>
+@endsection
+
+
+
+@section('content')
+<div class="content-wrapper">
+    <div class="content-header">
+        @include('admin.partials.content-header', ['name' => 'Roles', 'key' => 'Update'])
+    </div>
+    <div class="container">
+        <form action="{{ route('roles.update', ['id' => $role->id])}}" method="POST" enctype="multipart/form-data">
+            <div class="content">
+                <div class="container-fluid">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Role Name:</label>
+                                <input type="text" name="name" class="form-control"
+                                    value="{{($role->name)}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Decriptions Role:</label>
+                                <textarea name="display_name" class="form-control"
+                                    rows="4" >{{($role->display_name)}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 ml-1">
+
+                             <div class="col-md-12">
+                                    <label>
+                                        <input type="checkbox" class="checkall">
+                                        checkall
+                                    </label>
+                                </div>
+
+                            <div class="row">
+                                @foreach ($permissionsParent as $permissionsParentItem)
+                                <div class="card border-primary mb-3 col-md-12">
+                                    <div class="card-header text-bold">
+                                        <label for="">
+                                            <input type="checkbox" class="checkbox_wrapper">
+                                        </label>
+                                        Module {{$permissionsParentItem->name}}
+                                    </div>
+                                    <div class="row">
+                                        @foreach ($permissionsParentItem->permissionChildren as $permissionChildrenItem)
+                                        <div class="card-body text-primary col-md-3">
+                                            <h5 class="card-title">
+                                                <label for="">
+                                                    <input name="permission_id[]"
+                                                    {{$permissionsChecked->contains('id', $permissionChildrenItem->id) ? 'checked' : ''}}
+                                                    class="checkbox_children"
+                                                    type="checkbox" value="{{$permissionChildrenItem->id}}">
+                                                </label>
+                                                {{$permissionChildrenItem->name}}
+                                            </h5>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary float-right"
+                                style="margin-bottom: 20px;">Submit</button>
+                                  <a class="btn btn-danger" href="{{route('roles.index')}}">
+                                        Cancel
+                                    </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@endsection
+
+
