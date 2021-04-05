@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout.html">
+
+<body>
+
+    <div layout:fragment="content">
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var gameId = $('#gameId option').filter(':selected').val();
+                $("#gameId").change(function() {
+                    gameId = $('#gameId option').filter(':selected').val();
+                    $('select option.gameId').each(function() {
+                        //$("#h1").text(gId);
+                        var gid = $(this).data('gameid');
+                        //$("#h1").text();
+                        if (gid != gameId) {
+                            $(this).hide();
+                            $(this).prop("selected", false)
+                        } else {
+                            $(this).show();
+                            $(this).prop("selected", true)
+                        }
+
+                    });
+                });
+                $('select option.gameId').each(function() {
+                    var first = true;
+                    if (first) {
+
+                    } else {
+                        first = false;
+                        //$("#h1").text(gId);
+                        var gid = $(this).data('gameid');
+                        //$("#h1").text();
+                        if (gid != gameId) {
+                            $(this).hide();
+                            $(this).prop("selected", false)
+                        } else {
+                            $(this).show();
+                            $(this).prop("selected", true)
+                        }
+                    }
+                });
+            });
+
+            $(document).ready(function() {
+                $('form').submit(function(e) {
+                    var $errorMsg = $('<span id="error_msg"> Cannot blank.</span > ').css({
+                        'color': ' #D25353',
+                        'font - size': '13px'
+                    });
+                    if ($('#errors').val() == "") {
+                        e.preventDefault();
+                        $errorMsg.insertAfter($('#errors'));
+                    }
+                })
+            })
+
+            $(document).ready(function() {
+                $('form').submit(function(e) {
+                    var $errorMsg = $('<span id="error_msg"> Cannot blank.</span > ').css({
+                        'color': ' #D25353',
+                        'font - size': '13px'
+                    });
+                    if ($('#error').val() == "") {
+                        e.preventDefault();
+                        $errorMsg.insertAfter($('#error'));
+                    }
+                })
+            })
+
+            $(document).ready(function() {
+                $('form').submit(function(e) {
+                    var $errorMsg = $('<span id="error_msg"> Points must be 1 or more </span > ').css({
+                        'color': ' #D25353',
+                        'font - size': '13px'
+                    });
+                    if (parseInt($('#errorNum').val()) < 1) {
+                        e.preventDefault();
+                        $errorMsg.insertAfter($('#errorNum'));
+                    }
+                })
+            })
+        </script>
+
+        <div class="container">
+            <h1>Game Details Update</h1>
+            <hr>
+
+
+            <div class="container" id="contai">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form id="form-create" th:action="@{/gameDetails/doUpdate}" th:object="${gameDetails}" method="POST" enctype="multipart/form-data">
+
+                            <input type="text" th:field="*{id}" hidden="true">
+
+                            <div class="form-group row">
+                                <label for="inputQuestion" class="col-sm-4 col-form-label">Question</label>
+                                <div class="col-sm-8">
+                                    <textarea style="float: right;" id="errors" type="text" th:field="*{question}" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputActive" class="col-sm-4 col-form-label">Game</label>
+                                <div class="col-sm-8">
+                                    <select id="gameId" th:field="*{gameId}" class="form-control">
+                                        <option th:each="u : ${games}" th:value="${u.id}" th:utext="${u.name}">
+
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputActive" class="col-sm-4 col-form-label">Topic</label>
+                                <div class="col-sm-8">
+                                    <select th:field="*{topicId}" class="form-control">
+                                        <option class="gameId" th:each="t : ${topics}" th:value="${t.id}"
+                                            th:utext="${t.name}" th:attr="data-gameid = ${t.gameId.id}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputActive" class="col-sm-4 col-form-label">Difficulty</label>
+                                <div class="col-sm-8">
+                                    <select th:field="*{difficultyId}" class="form-control">
+                                        <option class="gameId" th:each="d : ${diff}" th:value="${d.id}"
+                                            th:utext="${d.name}" th:attr="data-gameid = ${d.gameId.id}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputDescription" class="col-sm-4 col-form-label">Points</label>
+                                <div class="col-sm-8">
+                                    <input id="errorNum" type="number" th:field="*{points}" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputFile" class="col-sm-4 col-form-label">Image</label>
+                                <div class="col-sm-8">
+                                    <input type="file" name="file" class="form-control" id="inputFile" accept="image/x-png,image/jpeg,image/jpg">
+                                </div>
+                            </div>
+
+                            <input type="text" hidden="true" th:field="*{image}" class="form-control" id="inputPassword3">
+
+                            <div class="form-group row">
+                                <label for="inputDescription" class="col-sm-4 col-form-label">Answer One</label>
+                                <div class="col-sm-8">
+                                    <input type="text" th:field="*{answerOne}" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputDescription" class="col-sm-4 col-form-label">Answer Two</label>
+                                <div class="col-sm-8">
+                                    <input type="text" th:field="*{answerTwo}" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputDescription" class="col-sm-4 col-form-label">Answer Three</label>
+                                <div style=" margin-top: 12px;" class="col-sm-8">
+                                    <input type="text" th:field="*{answerThree}" class="form-control" />
+                                </div>
+                            </div>
+                            <!-- 
+                            <div class="form-group row">
+                                <label for="inputDescription" class="col-sm-4 col-form-label">Answer Four</label>
+                                <div class="col-sm-8">
+                                    <input type="text" th:field="*{answerFour}" class="form-control" />
+                                </div>
+                            </div> -->
+
+                            <div class="form-group row">
+                                <label for="inputDescription" class="col-sm-4 col-form-label">Correct Answer</label>
+                                <div style=" margin-top: 12px;" class="col-sm-8">
+                                    <input id="error" type="text" th:field="*{correctAnswer}" class="form-control" />
+                                </div>
+                            </div>
+
+                            <select hidden="true" th:field="*{isActive}" class="form-control ">
+                                <option th:value="'active'" th:text="Active"></option>
+                                <option th:value="'inactive'" th:text="InActive"></option>
+                            </select>
+
+                            <div class="form-group row" style="margin-bottom: 0 !important;">
+                                <div class="col-sm-10" style="display: contents;">
+                                    <button type="submit" class="btn" id="b-admin1">Update</button>
+                                    <a href="#" data-th-href="@{/gameDetails/show}"> <input style="background-color: #D25353;" type="button" value="Cancel" class="btn" id="b-admin1" /></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

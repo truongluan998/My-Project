@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">SmartKidz</title>
+
+
+    <!-- Button back top -->
+    <link href="/content/site.css" rel="stylesheet" />
+    <!-- CDN mdbootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;display=swap"
+        as="font">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/css/mdb.min.css" rel="stylesheet">
+
+    <!-- Style Pagination -->
+    <link href="/content/pagedList.css" rel="stylesheet" />
+    <!-- Style SWAL-->
+    <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+
+    <!-- Style SWAL-->
+    <link rel='stylesheet' href='/content/sweetalert.min.css'>
+    <link href="/content/admin/css/dx.common.css" rel="stylesheet" />
+    <link href="/content/admin/css/dx.light.css" rel="stylesheet" />
+    <link href="/content/admin/css/simplePagination.css" rel="stylesheet" />
+    <!-- <link href="/content/pagedlist.css" rel="stylesheet" /> -->
+    <!-- <link href="~/content/site.css" rel="stylesheet" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.map"></script>
+    <!--CDN Swal -->
+    <script src="/content/admin/js/jquery.min.js"></script>
+
+    <script src="/content/admin/js/jquery.simplePagination.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
+    <script src="/content/admin/js/sweetalert2@8.js"></script>
+    <script src="/scripts/sweetalert.min.js"></script>
+    <script src="/content/admin/js/dx.all.js"></script>
+
+</head>
+
+<body class="container-fluid" style="padding: 0">
+    <!-- Admin Layout -->
+    <!-- Back to top button -->
+    <a id="button" style="background-color:#a6c"></a>
+
+    <script>
+        $(document).ready(function () {
+            $('ul.nav').find('a[href="' + location.pathname + '"]')
+                .closest('li').addClass('active');
+        });
+    </script>
+    <!--Sidebar-->
+    <div th:replace="layout/sidebar :: sidebar"></div>
+    <!--/.Sidebar-->
+
+    <div class="main-panel">
+        <!--Navbar-->
+        <div th:replace="layout/navbar :: navbar"></div>
+
+        <div layout:fragment="content"></div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small"
+            style="background-image: linear-gradient(to right, #8cc63f, #4caf50 , #8cc63f);">
+            <!-- Footer Links -->
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">
+                <a href="/Home/Index">&copy; @SmartKidz</a>
+            </div>
+            <!-- Copyright -->
+            <!-- JQuery -->
+
+        </footer>
+        <!-- Footer -->
+    </div>
+    <script>var btn = $('#button');
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+        });
+
+        btn.on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, '300');
+        });</script>
+</body>
+
+</html>

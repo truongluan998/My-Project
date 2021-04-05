@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <div th:fragment="sidebar" class="sidebar font-weight-bold" data-color="green" data-background-color="black"
+        data-image='url("../content/img/sidebar-2.jpg")'>
+
+        <div class="logo">
+            <a th:href="@{/index}">
+                <img class="mx-auto text-center d-block" src='/content/img/logo.png' style="width:10rem" />
+            </a>
+        </div>
+
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index}">
+                        <i class="fas fa-columns"></i>
+                        <p>Admin Dashboard</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin}">
+                        <i class="fas fa-address-card"></i>
+                        <p>Manage Admin</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user}">
+                        <i class="fas fa-users"></i>
+                        <p>Manage Users</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/game/show}">
+                        <i class="fas fa-dice"></i>
+                        <p>Manage Games</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/topic/show}">
+                        <i class="fas fa-book"></i>
+                        <p>Manage Topic</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/icon/show}">
+                        <i class="fab fa-redhat"></i>
+                        <p>Manage Icon</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/level/show}">
+                        <i class="fas fa-graduation-cap"></i>
+
+                        <p>Manage Level</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/difficulties/show}">
+                        <i class="fas fa-mask"></i>
+                        <p>Manage Difficuties</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

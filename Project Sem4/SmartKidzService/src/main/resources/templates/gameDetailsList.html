@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+<body>
+    <div layout:fragment="content">
+        <div class="container c-admin">
+            <p class="h4">List Game Details
+                <a th:href="@{/report/gameDetails}" class="btn  btn-sm mb-3" id="b-admin">File</a>
+                <a th:href="@{/gameDetails/create}" class="btn  btn-sm mb-3" id="b-admin">Add Game Details </a>
+                <a th:if="${status=='active'}" th:href="@{/gameDetails/showDeleted}" class="btn  btn-sm mb-3"
+                    id="b-admin"> Inactive Game Details
+                </a>
+                <a th:if="${status=='inactive'}" th:href="@{/gameDetails/show}" class="btn  btn-sm mb-3" id="b-admin">
+                    Active Game Details
+                </a>
+            </p>
+        </div>
+
+        <div style="float: right;">
+            <form th:if="${status=='active'}" th:action="@{/gameDetails/show}" method="GET" id="myform">
+                <div class="form-group row">
+                    <select class="form-control details" name="gameId" onchange="myform.submit()" th:value="gameId"
+                        style="font-size: 12px; width: 170px; margin-right: 15px; border: solid 2px #B9DC8A;">
+                        <option th:each="g : ${games}" th:value="${g.id}" th:utext="${g.name}"
+                            th:selected="${g.id == gId}"></option>
+                    </select>
+
+                    <select class="form-control details" name="topicId" th:value="topicId" onchange="myform.submit()"
+                        style="font-size: 12px; width: 170px; margin-right: 15px; border: solid 2px #B9DC8A;">
+                        <option>All Topics</option>
+                        <option th:each="t : ${topics}" th:value="${t.id}" th:utext="${t.name}"
+                            th:selected="${t.id == tId}"></option>
+                    </select>
+                </div>
+            </form>
+
+            <form th:if="${status=='inactive'}" th:action="@{/gameDetails/showDeleted}" method="GET" id="myform">
+                <div class="form-group row">
+                    <select class="form-control details" name="gameId" onchange="myform.submit()" th:value="gameId"
+                        style="font-size: 12px; width: 170px; margin-right: 15px; border: solid 2px #B9DC8A;">
+                        <option th:each="g : ${games}" th:value="${g.id}" th:utext="${g.name}"
+                            th:selected="${g.id == gId}"></option>
+                    </select>
+
+                    <select class="form-control details" name="topicId" th:value="topicId" onchange="myform.submit()"
+                        style="font-size: 12px; width: 170px; margin-right: 15px; border: solid 2px #B9DC8A;">
+                        <option th:each="t : ${topics}" th:value="${t.id}" th:utext="${t.name}"
+                            th:selected="${t.id == tId}"></option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <table class="table main-table">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Correct Answer</th>
+                    <th scope="col">Difficulty</th>
+                    <th scope="col">Points</th>
+                    <th scope="col">Active</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="g, iterationStatus : ${gameDetails}">
+                    <th hidden="true" th:text="${g.id}"></th>
+                    <th scope="col" th:text="${iterationStatus.count}"></th>
+                    <td th:text="${g.question}"></td>
+                    <td>
+                        <img th:src="${g.image}" onerror="this.src='/downloadFile/none.png'" width="50px" height="50px">
+                    </td>
+                    <td th:text="${g.correctAnswer}"></td>
+                    <td th:text="${g.difficultyId}"></td>
+                    <td th:text="${g.points}"></td>
+
+                    <td th:switch="${g.isActive.toString()}">
+                        <p class="text-success" th:case="'active'"><i class="fas fa-check"></i></p>
+                        <p class="text-danger" th:case="*"><i class="fas fa-times"></i></p>
+                    </td>
+
+                    <td th:switch="${g.isActive.toString()}">
+                        <a th:href="@{/gameDetails/update/{id}(id=${g.id})}" class="btn  btn-sm mb-3"
+                            id="b-admin1">Update</a>
+                        <a th:case="'inactive'" th:href="@{/gameDetails/enable/{id}(id=${g.id})}"
+                            class="btn  btn-sm mb-3" id="b-admin1" title="Enable"><i class="fas fa-check"></i></a>
+                        <a th:case="'active'" th:href="@{/gameDetails/delete/{id}(id=${g.id})}" class="btn  btn-sm mb-3"
+                            id="b-admin2" title="Disable"><i class="fas fa-times"></i></a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type='text/javascript'>
+        function SearchTopic(gameId, topicId) {
+            $.ajax({
+                url: "/gameDetails/show/",
+                type: "GET",
+                data: {
+                    myform: gameId,
+                    topicId,
+                },
+                success: function (data) {
+                    $('#myform').append(data);
+                }
+            })
+        }
+    </script>
+
+    </div>
+
+
+
+</body>
+
+</html>

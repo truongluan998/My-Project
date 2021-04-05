@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+<body>
+    <div layout:fragment="content">
+
+        <div class="container c-admin">
+            <p class="h4">Difficultiles List
+                <a th:href="@{/report/diff}" class="btn  btn-sm mb-3" id="b-admin"> File</a>
+                <a th:href="@{/difficulties/create}" class="btn  btn-sm mb-3" id="b-admin"> Add Difficulties </a>
+                <a th:if="${status=='active'}" th:href="@{/difficulties/showDeleted}" class="btn  btn-sm mb-3"
+                    id="b-admin"> Inactive Difficulties
+                </a>
+                <a th:if="${status=='inactive'}" th:href="@{/difficulties/show}" class="btn  btn-sm mb-3" id="b-admin">
+                    Active Difficulties
+                </a>
+
+
+
+            <table class="table main-table">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Game</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Required Score</th>
+                        <th scope="col">Time Limit</th>
+                        <th scope="col">Total Time Play</th>
+                        <th scope="col">Total Question</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="d, iterationStatus : ${difficulties}">
+                        <th hidden="true" th:text="${d.id}"></th>
+                        <th scope="col" th:text="${iterationStatus.count}"></th>
+                        <td th:text="${d.gameId.name}"></td>
+                        <td th:text="${d.name}"></td>
+                        <td th:text="${d.requiredScore}"></td>
+                        <td th:text="${d.timeLimit}"></td>
+                        <td th:text="${d.totalTimePlay}"></td>
+                        <td th:text="${d.totalQuestion}"></td>
+                        <td th:switch="${d.isActive.toString()}">
+                            <p class="text-success" th:case="'active'"><i class="fas fa-check"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-times"></i></p>
+                        </td>
+                        <td th:switch="${d.isActive.toString()}">
+                            <a th:href="@{/difficulties/update/{id}(id=${d.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1">Update</a>
+                            <a th:case="'active'" th:href="@{/difficulties/delete/{id}(id=${d.id})}"
+                                class="btn  btn-sm mb-3" id="b-admin2" title="Enable"><i class="fas fa-times"></i></a>
+                            <a th:case="'inactive'" th:href="@{/difficulties/enable/{id}(id=${d.id})}"
+                                class="btn  btn-sm mb-3" id="b-admin1" title="Disable"><i class="fas fa-check"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

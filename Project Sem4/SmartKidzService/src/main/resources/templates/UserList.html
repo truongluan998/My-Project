@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+<body>
+    <div layout:fragment="content">
+
+        <div class="container c-admin">
+            <p class="h4">Users List
+                <a th:href="@{/report/users}" class="btn  btn-sm mb-3" id="b-admin"> File</a>
+                <a th:href="@{/user/create}" class="btn  btn-sm mb-3" id="b-admin"> Add Users </a>
+                <a th:if="${status=='active'}" th:href="@{/userDeleted}" class="btn  btn-sm mb-3" id="b-admin"> Inactive
+                    Users
+                </a>
+                <a th:if="${status=='inactive'}" th:href="@{/user}" class="btn  btn-sm mb-3" id="b-admin"> Active Users
+                </a>
+            </p>
+
+
+            <table class="table main-table">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="u, iterationStatus : ${users}">
+                        <th hidden="true" th:text="${u.id}"></th>
+                        <th scope="col" th:text="${iterationStatus.count}"></th>
+                        <td><img th:src="${u.photo}" onerror="this.src='/downloadFile/none.png'" width="50px"
+                                height="50px"></td>
+                        <td th:text="${u.username}"></td>
+                        <td th:text="${u.fullName}"></td>
+                        <td th:text="${u.email}"></td>
+                        <td th:switch="${u.gender.toString()}">
+                            <p class="text-success" th:case="'male'"><i class="fas fa-male fa-2x"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-female fa-2x"></i></p>
+                        </td>
+                        <td th:switch="${u.isActive.toString()}">
+                            <p class="text-success" th:case="'active'"><i class="fas fa-check"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-times"></i></p>
+                        </td>
+
+                        <td th:switch="${u.isActive.toString()}">
+                            <a th:href="@{/user/update/{id}(id=${u.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1">Update</a>
+                            <a th:href="@{/user/reset/{id}(id=${u.id})}" title="Default password is 123123"
+                                class="btn  btn-sm mb-3" id="b-admin2"
+                                style="background-color: #F7EC02 !important; color: #333;">Reset
+                                Password</a>
+                            <a th:case="'active'" th:href="@{/user/delete/{id}(id=${u.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin2" title="Disable"><i class="fas fa-times"></i></a>
+                            <a th:case="'inactive'" th:href="@{/user/enable/{id}(id=${u.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1" title="Enable"><i class="fas fa-check"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- <div class="display: contents;" th:if="${totalPages > 1}">
+                <div class="row col-sm-10">
+                    <div class="col-sm-2">
+                        Total Rows: [[${totalItems}]]
+                    </div>
+                    <div class="col-sm-1">
+                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+        						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+        						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+        					</span>
+        				</div>
+        				<div class = "col-sm-1">
+        					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+        					<span th:unless="${currentPage < totalPages}">Next</span>
+        				</div>
+        				
+        				 <div class="col-sm-1">
+            				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+        					<span th:unless="${currentPage < totalPages}">Last</span>
+           				 </div>
+        			</div>
+        		</div> -->
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

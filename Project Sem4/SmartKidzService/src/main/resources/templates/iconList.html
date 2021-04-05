@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+<body>
+    <div layout:fragment="content">
+
+        <div class="container c-admin">
+            <p class="h4">Icon List
+                <a th:href="@{/report/icon}" class="btn  btn-sm mb-3" id="b-admin"> File </a>
+                <a th:href="@{/icon/create}" class="btn  btn-sm mb-3" id="b-admin"> Add Icon </a>
+                <a th:if="${status=='active'}" th:href="@{/icon/showDeleted}" class="btn  btn-sm mb-3" id="b-admin">
+                    Inactive Icons
+                </a>
+                <a th:if="${status=='inactive'}" th:href="@{/icon/show}" class="btn  btn-sm mb-3" id="b-admin"> Active
+                    Icons
+                </a>
+            </p>
+
+
+            <table id="table_icon" class="table main-table display">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="i, iterationStatus : ${icons}">
+                        <th hidden="true" th:text="${i.id}"></th>
+                        <th scope="col" th:text="${iterationStatus.count}"></th>
+                        <td><img th:src="${i.url}" onerror="this.src='/downloadFile/none.png'" width="50px"
+                                height="50px"></td>
+
+                        <td th:switch="${i.isActive.toString()}">
+                            <p class="text-success" th:case="'active'"><i class="fas fa-check"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-times"></i></p>
+                        </td>
+
+                        <td th:switch="${i.isActive.toString()}">
+                            <a th:href="@{/icon/update/{id}(id=${i.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1">Update</a>
+                            <a th:case="'active'" th:href="@{/icon/delete/{id}(id=${i.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin2" title="Disable"><i class="fas fa-times"></i></a>
+                            <a th:case="'inactive'" th:href="@{/icon/enable/{id}(id=${i.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1" title="Enable"><i class="fas fa-check"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- <table id="table_icon" class="table main-table display">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="i, iterationStatus : ${icons}">
+                        <th hidden="true" th:text="${i.id}"></th>
+                        <th scope="col" th:text="${iterationStatus.count}"></th>
+                        <td><img th:src="${i.url}" onerror="this.src='/downloadFile/none.png'" width="50px"
+                                height="50px"></td>
+
+                        <td th:text="${i.isActive}">
+                            <p class="text-success" th:case="'active'"><i class="fas fa-check"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-times"></i></p>
+                        </td>
+
+                        <td th:text="${i.isActive}">
+                            <a th:href="@{/icon/update/{id}(id=${i.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1">Update</a>
+                            <a th:case="'active'" th:href="@{/icon/delete/{id}(id=${i.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin2" title="Disable"><i class="fas fa-times"></i></a>
+                            <a th:case="'inactive'" th:href="@{/icon/enable/{id}(id=${i.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1" title="Enable"><i class="fas fa-check"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+
+        <!-- 
+        <script type="text/javascript">
+            /*<![CDATA[*/
+            $(document).ready(function () {
+                $('#table_icon').DataTable({
+                    "bPaginate": true,
+                    "bLengthChange": true,
+                    "bFilter": true,
+                    "bSort": true,
+                    "bInfo": true,
+                    "bAutoWidth": false,
+                    "dom": 'Bfrtip',
+
+                });
+            });
+            /*]]>*/
+        </script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+        <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script> -->
+    </div>
+
+
+
+</body>
+
+</html>

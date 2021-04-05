@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<htmllang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+
+    <body>
+        <div layout:fragment="content">
+            <div class="container" style="padding-bottom: 25px;">
+                <div class="row">
+                    <div class="total">
+                        <div class="row r-card">
+                            <div class="col-sm-3">
+                                <div class="card text-white mb-3" style="background: #FF9141;">
+                                    <div class="card-header">Total Users</div>
+                                    <div class="card-body">
+
+                                        <h5 class="card-title ani" id="users" th:text="${#lists.size(users)}"></h5>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="card text-white mb-3" style="background: #6BE631;">
+                                    <div class="card-header">Total Games</div>
+                                    <div class="card-body">
+                                      
+                                        <h5 class="card-title ani" id="games" th:text="${#lists.size(games)}"></h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-3">
+                                <div class="card text-white mb-3" style="background: #21E7F3;">
+                                    <div class="card-header">Total Topics</div>
+                                    <div class="card-body">
+                                      
+                                        <h5 class="card-title ani" id="topics" th:text="${#lists.size(topics)}"></h5>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm 3">
+                                <div class="card text-white mb-3" style="background: #D25353;">
+                                    <div class="card-header">Total Levels</div>
+                                    <div class="card-body">
+                                      
+                                        <h5 class="card-title ani" id="levels" th:text="${#lists.size(levels)}" ></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="first">
+                        <div class="chart">
+                            <p class="report"><strong style="font-weight: bold;"> User report last 7 days</strong>
+                                <form hidden="true" class="report-d">
+                                    <label style="margin: 5px; font-size: 0.8rem;" for="cars">Last 7 days</label>
+                                    <select name="cars" id="cars">
+                                    <option value="volvo"></option>
+                                    <option value="saab"></option>
+                                </select>
+                                </form>
+                            </p>
+                            <ul class="numbers">
+                                <li>100</li>
+                                <li>80</li>
+                                <li>60</li>
+                                <li>40</li>
+                                <li>20</li>
+                                <li>0</li>
+                            </ul>
+                            <ul class="bars">
+                                <li th:each="l : ${listU}">
+                                    <div class="bar" th:attr="data-percentage=${l.AmountU}"></div><span th:text="${l.DateU}"></span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pie">
+                        <div id="chartContainer" style="height: 450px; width: 175%;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $('.ani').each(function () {
+                    $(this).prop('Counter', 0).animate({
+                        Counter: $(this).text()
+                    }, {
+                        duration: 1000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                });
+            </script>
+
+           
+            <script type="text/javascript">
+                $(function () {
+                    $('.bars li .bar').each(function (key, bar) {
+                        var percentage = $(this).data('percentage');
+                        $(this).animate({
+                            'height': percentage + '%'
+                        }, 1000);
+                    });
+                });
+            </script>
+      
+
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+
+                window.onload = function () {
+                    var dataReport = /*[[${listG}]]*/ 'default';
+
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        theme: "light1", // "light1", "light2", "dark1", "dark2"
+                        exportEnabled: true,
+                        animationEnabled: true,
+                        title: {
+                            text: "Game Plays report last 7 days"
+                        },
+                        data: [{
+                            type: "pie",
+                            startAngle: 16,
+                            toolTipContent: "{label} - {y}",
+                            showInLegend: "true",
+                            legendText: "{label}",
+                            indexLabelFontSize: 16,
+                            yValueFormatString: "##0.0",
+                            indexLabel: "{label} - {y}",
+                            dataPoints: /*[[${listG}]]*/ 'default'
+                        }]
+                    });
+
+                    //chart.options.data[0].dataPoints = dataReport;
+                    chart.render();
+                }
+                    /*]]>*/
+            </script>
+
+        </div>
+    </body>
+
+    </html>

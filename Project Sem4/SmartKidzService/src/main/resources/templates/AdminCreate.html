@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+<body>
+
+    <div layout:fragment="content">
+
+        <div class="container">
+            <h1>Admin Create</h1>
+            <hr>
+
+
+            <div class="container" id="contai">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form id="form-create" th:action="@{/admin/doCreate}" th:object="${admin}" method="POST"
+                            enctype="multipart/form-data">
+
+                            <input type="text" th:field="*{id}" hidden="true">
+
+                            <div class="form-group row">
+                                <label for="inputUsername" class="col-sm-4 col-form-label">Username</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="username" th:field="*{username}" id="name"
+                                        class="form-control" />
+                                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                                                    class="alert alert-danger"></p>
+                                    <p th:text="${errorMessage} ?: ''" style="color: #D25353;"></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" th:field="*{password}" id="confirmPassword" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Confirm Password</label>
+                                <div class="col-sm-8"  style="padding-top: 12px;">
+                                    <input type="password" id="checkPassword" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail" class="col-sm-4 col-form-label">FullName</label>
+                                <div class="col-sm-8">
+                                    <input type="text" th:field="*{fullName}" class="form-control" id="inputEmail3">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-4 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" th:field="*{email}" class="form-control" id="inputPassword3">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputGender" class="col-sm-4 col-form-label">Gender</label>
+                                <div class="col-sm-8">
+                                    <select th:field="*{gender}" class="form-control">
+                                        <option th:value="'male'" th:text="Male"></option>
+                                        <option th:value="'female'" th:text="Female"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputFile" class="col-sm-4 col-form-label">Photo</label>
+                                <div class="col-sm-8">
+                                    <input type="file" name="file" class="form-control" id="inputFile"
+                                        accept="image/x-png,image/jpeg,image/jpg">
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group row">
+                                <label for="inputActive" class="col-sm-4 col-form-label">Active</label>
+                                <div class="col-sm-8">
+                                    <select th:field="*{isActive}" class="form-control ">
+                                        <option th:value="'active'" th:text="Active"></option>
+                                        <option th:value="'inactive'" th:text="InActive"></option>
+                                    </select>
+                                </div>
+                            </div> -->
+
+                            <div class="form-group row" style="margin-bottom: 0 !important;">
+                                <div class="col-sm-10" style="display: contents;">
+                                    <button type="submit" class="btn" id="b-admin1">Create New</button>
+                                    <a href="#" data-th-href="@{/admin}"> <input style="background-color: #D25353;"
+                                            type="button" value="Cancel" class="btn" id="b-admin1" /></a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('form').submit(function (e) {
+                    var $errorMsg = $('<span id="error_msg"> Cannot blank.</span > ').css({ 'color': ' #D25353', 'font - size': '13px' });
+                    if ($('#confirmPassword').val() == "") {
+                        e.preventDefault();
+                        $errorMsg.insertAfter($('#confirmPassword'));
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                $("form").submit(function (e) {
+                    var $errorMsg = $('<span id="error_msg">Passwords do not match.</span>').css({ 'color': ' #D25353', 'font-size': '13px' });
+                    if ($('#confirmPassword').val() != $('#checkPassword').val()) {
+                        e.preventDefault();
+                        $errorMsg.insertAfter($('#checkPassword'));
+                    }
+                });
+            });
+
+        </script>
+
+    </div>
+</body>
+
+</html>

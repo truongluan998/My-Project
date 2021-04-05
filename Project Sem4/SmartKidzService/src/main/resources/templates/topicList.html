@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+<body>
+    <div layout:fragment="content">
+
+        <div class="container c-admin">
+            <p class="h4">Topic List
+                <a th:href="@{/report/topic}" class="btn  btn-sm mb-3" id="b-admin"> File </a>
+                <a th:href="@{/topic/create}" class="btn  btn-sm mb-3" id="b-admin"> Add Topic </a>
+                <a th:if="${status=='active'}" th:href="@{/topic/showDeleted}" class="btn  btn-sm mb-3" id="b-admin">
+                    Inactive Topics
+                </a>
+                <a th:if="${status=='inactive'}" th:href="@{/topic/show}" class="btn  btn-sm mb-3" id="b-admin"> Active
+                    Topics
+                </a>
+            </p>
+
+
+
+            <table class="table main-table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Game</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="t, iterationStatus : ${topics}">
+                        <th hidden="true" th:text="${t.id}"></th>
+                        <th scope="col" th:text="${iterationStatus.count}"></th>
+
+                        <td>
+                            <img th:src="${t.image}" width="50px" height="50px">
+                        </td>
+
+                        <td th:text="${t.name}"></td>
+                        <td th:text="${t.gameId.name}"></td>
+
+                        <td th:switch="${t.isActive.toString()}">
+                            <p class="text-success" th:case="'active'"><i class="fas fa-check"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-times"></i></p>
+                        </td>
+
+                        <td th:switch="${t.isActive.toString()}">
+                            <a th:href="@{/topic/update/{id}(id=${t.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1">Update</a>
+                            <a th:case="'active'" th:href="@{/topic/delete/{id}(id=${t.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin2" title="Disable"><i class="fas fa-times"></i></a>
+                            <a th:case="'inactive'" th:href="@{/topic/enable/{id}(id=${t.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1" title="Enable"><i class="fas fa-check"></i></a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

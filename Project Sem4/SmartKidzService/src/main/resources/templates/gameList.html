@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+<body>
+    <div layout:fragment="content">
+
+        <div class="container c-admin">
+            <p class="h4">List Game
+                <a th:href="@{/report/game}" class="btn  btn-sm mb-3" id="b-admin"> File</a>
+                <a th:href="@{/game/create}" class="btn  btn-sm mb-3" id="b-admin"> Add Game </a><a
+                    th:if="${status=='active'}" th:href="@{/game/showDeleted}" class="btn  btn-sm mb-3" id="b-admin">
+                    Inactive Games
+                </a>
+                <a th:if="${status=='inactive'}" th:href="@{/game/show}" class="btn  btn-sm mb-3" id="b-admin"> Active
+                    Games
+                </a>
+            </p>
+
+
+            <table class="table main-table">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Background Music</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Game Details</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="g,iterationStatus : ${games}">
+                        <th hidden="true" th:text="${g.id}"></th>
+                        <th scope="col" th:text="${iterationStatus.count}"></th>
+                        <td><img th:src="${g.image}" onerror="this.src='/downloadFile/none.png'" width="50px"
+                                height="50px"></td>
+                        <td th:text="${g.name}"></td>
+                        <td th:text="${g.description}"></td>
+                        <td>
+                            <audio controls style="width: 100px;height: 40px;" loop>
+                                <source th:src="${g.bgm}" width="50px" height="50px" type="audio/ogg">
+                            </audio>
+                        </td>
+                        <td th:switch="${g.isActive.toString()}">
+                            <p class="text-success" th:case="'active'"><i class="fas fa-check"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-times"></i></p>
+                        </td>
+                        <td>
+                            <a th:href="@{/gameDetails/show?(gameId=${g.id})}" class="btn  btn-sm mb-3" id="b-admin1">
+                                View
+                            </a>
+
+                        <td th:switch="${g.isActive.toString()}" style="display: flex;">
+                            <a th:href="@{/game/update/{id}(id=${g.id})}" class="btn  btn-sm mb-3" id="b-admin1">
+                                Update
+                            </a>
+
+                            <a th:case="'active'" th:href="@{/game/delete/{id}(id=${g.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin2" title="Disable">
+                                <i class="fas fa-times"></i>
+                            </a>
+
+                            <a th:case="'inactive'" th:href="@{/game/enable/{id}(id=${g.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1" title="Enable">
+                                <i class="fas fa-check"></i>
+                            </a>
+                        </td>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

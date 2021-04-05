@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/layout.html">
+
+<body>
+    <div layout:fragment="content">
+
+        <div class="container c-admin">
+            <p class="h4">Admin List
+                <a th:href="@{/report/admins}" class="btn  btn-sm mb-3" id="b-admin"> File</a>
+                <a th:href="@{/admin/create}" class="btn  btn-sm mb-3" id="b-admin"> Add Admin </a>
+                <a th:if="${status=='active'}" th:href="@{/adminDeleted}" class="btn  btn-sm mb-3" id="b-admin">
+                    Inactive Admins
+                </a>
+                <a th:if="${status=='inactive'}" th:href="@{/admin}" class="btn  btn-sm mb-3" id="b-admin"> Active
+                    Admins
+                </a>
+            </p>
+
+
+
+            <table class="table main-table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="a, iterationStatus : ${admins}">
+                        <th hidden="true" th:text="${a.id}"></th>
+
+                        <th scope="col" th:text="${iterationStatus.count}"></th>
+                        <td><img th:src="${a.photo}" onerror="this.src='/downloadFile/none.png'" width="50px"
+                                height="50px"></td>
+                        <td th:text="${a.username}"></td>
+                        <td th:text="${a.fullName}"></td>
+                        <td th:text="${a.email}"></td>
+
+                        <td th:switch="${a.gender.toString()}">
+                            <p class="text-success" th:case="'male'"><i class="fas fa-male fa-2x"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-female fa-2x"></i></p>
+                        </td>
+
+                        <td th:switch="${a.isActive.toString()}">
+                            <p class="text-success" th:case="'active'"><i class="fas fa-check"></i></p>
+                            <p class="text-danger" th:case="*"><i class="fas fa-times"></i></p>
+                        </td>
+
+                        <td th:switch="${a.isActive.toString()}">
+                            <a th:href="@{/admin/update/{id}(id=${a.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1">Update</a>
+                            <a th:href="@{/admin/reset/{id}(id=${a.id})}" title="Default password is 123123"
+                                class="btn  btn-sm mb-3" id="b-admin2"
+                                style="background-color: #F7EC02 !important; color: #333;">Reset
+                                Password</a>
+                            <a th:case="'active'" th:href="@{/admin/delete/{id}(id=${a.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin2" title="Disable"><i class="fas fa-times"></i></a>
+                            <a th:case="'inactive'" th:href="@{/admin/enable/{id}(id=${a.id})}" class="btn  btn-sm mb-3"
+                                id="b-admin1" title="Enable"><i class="fas fa-check"></i></a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
