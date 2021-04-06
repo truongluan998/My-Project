@@ -35,9 +35,15 @@
     <string name="nav_sign_out">Sign Out</string>
 
 
-<!--    My Profile-->
+    <!--    My Profile-->
     <string name="mobile">Mobile</string>
     <string name="update">UPDATE</string>
     <string name="my_profile_title">My Profile</string>
+
+
+    <!--    Floating Button-->
+    <string name="create_board_title">Create Board</string>
+    <string name="create">CREATE</string>
+    <string name="board_name">Board Name</string>
 
 </resources>
