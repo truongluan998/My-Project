@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.activity_my_profile.toolbar_my_profile_act
 import kotlinx.android.synthetic.main.activity_task_lisk.*
 
 class TaskListActivity : BaseActivity() {
+
+    private lateinit var mBoardDetails: Board
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_lisk)
@@ -27,7 +30,7 @@ class TaskListActivity : BaseActivity() {
         FireStoreClass().getBoardDetails(this, boardDocumentId)
     }
 
-    private fun setupActionBar(title: String) {
+    private fun setupActionBar() {
 
         setSupportActionBar(toolbar_task_list_activity)
 
@@ -35,15 +38,18 @@ class TaskListActivity : BaseActivity() {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.ic_white_back_24dp)
-            actionBar.title = title
+            actionBar.title = mBoardDetails.name
         }
 
         toolbar_task_list_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
     fun boardDetails(board: Board) {
+
+        mBoardDetails = board
+
         hideProgressDialog()
-        setupActionBar(board.name)
+        setupActionBar()
 
         val addTaskList = Task(resources.getString(R.string.add_list))
         board.taskList.add(addTaskList)
@@ -53,5 +59,22 @@ class TaskListActivity : BaseActivity() {
 
         val adapter = TaskListItemsAdapter(this, board.taskList)
         rv_task_list.adapter = adapter
+    }
+
+    fun addUpdateTaskListSuccess() {
+        hideProgressDialog()
+
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FireStoreClass().getBoardDetails(this, mBoardDetails.documentId)
+    }
+
+    fun createTaskList(taskListName: String) {
+        val task = Task(taskListName, FireStoreClass().getCurrentUserId())
+        mBoardDetails.taskList.add(0, task)
+        mBoardDetails.taskList.removeAt(mBoardDetails.taskList.size - 1)
+
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        FireStoreClass().addUpdateTaskList(this, mBoardDetails)
     }
 }

@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import eu.tutorials.projectmanage.R
+import eu.tutorials.projectmanage.activities.TaskListActivity
 import eu.tutorials.projectmanage.models.Task
 import io.opencensus.resource.Resource
 import kotlinx.android.synthetic.main.item_task.view.*
@@ -34,6 +36,30 @@ open class TaskListItemsAdapter(private val context: Context,
             } else {
                 holder.itemView.tv_add_task_list.visibility = View.GONE
                 holder.itemView.ll_task_item.visibility = View.VISIBLE
+            }
+        }
+
+        holder.itemView.tv_task_list_title.text = model.title
+
+        holder.itemView.tv_add_task_list.setOnClickListener {
+            holder.itemView.tv_add_task_list.visibility = View.GONE
+            holder.itemView.cv_add_task_list_name.visibility = View.VISIBLE
+        }
+
+        holder.itemView.ib_close_list_name.setOnClickListener {
+            holder.itemView.tv_add_task_list.visibility = View.VISIBLE
+            holder.itemView.cv_add_task_list_name.visibility = View.GONE
+        }
+
+        holder.itemView.ib_done_list_name.setOnClickListener {
+            val listName = holder.itemView.et_task_list_name.text.toString()
+
+            if (listName.isNotEmpty()) {
+                if (context is TaskListActivity) {
+                    context.createTaskList(listName)
+                }
+            } else {
+                Toast.makeText(context, "Please Enter Name", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -119,6 +119,7 @@ class FireStoreClass {
                 document ->
                 Log.i(activity.javaClass.simpleName, document.documents.toString())
                 val boardList: ArrayList<Board> = ArrayList()
+
                 for(i in document.documents) {
                     val board = i.toObject(Board::class.java)!!
                     board.documentId = i.id
@@ -140,13 +141,32 @@ class FireStoreClass {
             .addOnSuccessListener {
                     document ->
                 Log.i(activity.javaClass.simpleName, document.toString())
-
-                activity.boardDetails(document.toObject(Board::class.java)!!)
+                val board = document.toObject(Board::class.java)!!
+                board.documentId = document.id
+                activity.boardDetails(board)
 
             }.addOnFailureListener{
                     e ->
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
+            }
+    }
+
+    fun addUpdateTaskList(activity: TaskListActivity, board: Board) {
+        val taskListHashMap = HashMap<String, Any>()
+        taskListHashMap[Constants.TASK_LIST] = board.taskList
+
+        mFireStore.collection(Constants.BOARDS)
+            .document(board.documentId)
+            .update(taskListHashMap)
+            .addOnSuccessListener {
+                Log.e(activity.javaClass.simpleName, "Task List Update Successfully")
+
+                activity.addUpdateTaskListSuccess()
+            }.addOnFailureListener {
+                e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while creating a board", e)
             }
     }
 
