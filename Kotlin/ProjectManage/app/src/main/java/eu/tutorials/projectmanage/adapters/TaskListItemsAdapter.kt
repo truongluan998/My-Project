@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import eu.tutorials.projectmanage.R
 import eu.tutorials.projectmanage.activities.TaskListActivity
@@ -15,8 +16,10 @@ import eu.tutorials.projectmanage.models.Task
 import io.opencensus.resource.Resource
 import kotlinx.android.synthetic.main.item_task.view.*
 
-open class TaskListItemsAdapter(private val context: Context,
-                                private var list: ArrayList<Task>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+open class TaskListItemsAdapter(
+    private val context: Context,
+    private var list: ArrayList<Task>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_task, parent, false)
         val layoutParams = LinearLayout.LayoutParams(
@@ -91,7 +94,37 @@ open class TaskListItemsAdapter(private val context: Context,
         holder.itemView.ib_delete_list.setOnClickListener {
             alertDialogForDeleteList(position, model.title)
         }
+
+        holder.itemView.tv_add_card.setOnClickListener {
+
+            holder.itemView.tv_add_card.visibility = View.GONE
+            holder.itemView.cv_add_card.visibility = View.VISIBLE
+
+            holder.itemView.ib_close_card_name.setOnClickListener {
+                holder.itemView.tv_add_card.visibility = View.VISIBLE
+                holder.itemView.cv_add_card.visibility = View.GONE
+            }
+
+            holder.itemView.ib_done_card_name.setOnClickListener {
+
+                val cardName = holder.itemView.et_card_name.text.toString()
+
+                if (cardName.isNotEmpty()) {
+                    if (context is TaskListActivity) {
+                        context.addCardToTaskList(position, cardName)
+                    }
+                }else{
+                    Toast.makeText(context, "Please Enter Card Detail.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+            holder.itemView.rv_card_list.layoutManager = LinearLayoutManager(context)
+            holder.itemView.rv_card_list.setHasFixedSize(true)
+
+            val adapter = CardListItemsAdapter(context, model.cards)
+            holder.itemView.rv_card_list.adapter = adapter
     }
+
 
     private fun alertDialogForDeleteList(position: Int, title: String) {
         val builder = AlertDialog.Builder(context)
@@ -118,10 +151,10 @@ open class TaskListItemsAdapter(private val context: Context,
         return list.size
     }
 
-    private fun Int.toDp(): Int = (this/Resources.getSystem().displayMetrics.density).toInt()
+    private fun Int.toDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
 
     private fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view)
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 }
