@@ -50,6 +50,13 @@ public class OnBoarding extends AppCompatActivity {
         addDots(0);
         viewPager.addOnPageChangeListener(changeListener);
 
+        letGetStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OnBoarding.this, UserDashboard.class));
+            }
+        });
+
     }
 
     public void skip(View view) {

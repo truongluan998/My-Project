@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.constraintlayout.solver.state.State
 import androidx.recyclerview.widget.LinearLayoutManager
 import eu.tutorials.projectmanage.R
 import eu.tutorials.projectmanage.adapters.TaskListItemsAdapter
@@ -27,6 +28,7 @@ class TaskListActivity : BaseActivity() {
 
     companion object {
         const val MEMBERS_REQUEST_CODE: Int  = 13
+        const val CARD_DETAILS_REQUEST_CODE: Int = 14
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,12 +46,20 @@ class TaskListActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK && requestCode == MEMBERS_REQUEST_CODE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == MEMBERS_REQUEST_CODE || requestCode == CARD_DETAILS_REQUEST_CODE) {
             showProgressDialog(resources.getString(R.string.please_wait))
             FireStoreClass().getBoardDetails(this, mBoardDocumentId)
         }else {
             Log.e("Cancelled", "Cancelled")
         }
+    }
+
+    fun cardDetails(taskListPosition: Int, cardPosition: Int) {
+        val intent = Intent(this, CardDetailsActivity::class.java)
+        intent.putExtra(Constants.BOARD_DETAIL, mBoardDetails)
+        intent.putExtra(Constants.TASK_LIST_ITEM_POSITION, taskListPosition)
+        intent.putExtra(Constants.CARD_LIST_ITEM_POSITION, cardPosition)
+        startActivityForResult(intent, CARD_DETAILS_REQUEST_CODE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
