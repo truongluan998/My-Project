@@ -26,7 +26,7 @@ class TaskListActivity : BaseActivity() {
 
     private lateinit var mBoardDetails: Board
     private lateinit var mBoardDocumentId: String
-    private lateinit var mAssignedMemberDetailList: ArrayList<User>
+    lateinit var mAssignedMembersDetailList: ArrayList<User>
 
     companion object {
         const val MEMBERS_REQUEST_CODE: Int  = 13
@@ -42,7 +42,7 @@ class TaskListActivity : BaseActivity() {
         }
 
         showProgressDialog(resources.getString(R.string.please_wait))
-        FireStoreClass().getBoardDetails(this, mBoardDocumentId)
+        FireStoreClass().getBoardDetails(this@TaskListActivity, mBoardDocumentId)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -61,7 +61,7 @@ class TaskListActivity : BaseActivity() {
         intent.putExtra(Constants.BOARD_DETAIL, mBoardDetails)
         intent.putExtra(Constants.TASK_LIST_ITEM_POSITION, taskListPosition)
         intent.putExtra(Constants.CARD_LIST_ITEM_POSITION, cardPosition)
-        intent.putExtra(Constants.BOARD_MEMBERS_LIST, mAssignedMemberDetailList)
+        intent.putExtra(Constants.BOARD_MEMBERS_LIST, mAssignedMembersDetailList)
         startActivityForResult(intent, CARD_DETAILS_REQUEST_CODE)
     }
 
@@ -103,14 +103,7 @@ class TaskListActivity : BaseActivity() {
         hideProgressDialog()
         setupActionBar()
 
-        val addTaskList = Task(resources.getString(R.string.add_list))
-        board.taskList.add(addTaskList)
 
-        rv_task_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_task_list.setHasFixedSize(true)
-
-        val adapter = TaskListItemsAdapter(this, board.taskList)
-        rv_task_list.adapter = adapter
 
         showProgressDialog(resources.getString(R.string.please_wait))
         FireStoreClass().getAssignedMembersListDetails(this,
@@ -180,8 +173,19 @@ class TaskListActivity : BaseActivity() {
     }
 
     fun boardMembersDetailsList(list: ArrayList<User>) {
-        mAssignedMemberDetailList = list
+        mAssignedMembersDetailList = list
 
         hideProgressDialog()
+
+
+        val addTaskList = Task(resources.getString(R.string.add_list))
+        mBoardDetails.taskList.add(addTaskList)
+
+        rv_task_list.layoutManager =
+            LinearLayoutManager(this@TaskListActivity, LinearLayoutManager.HORIZONTAL, false)
+        rv_task_list.setHasFixedSize(true)
+
+        val adapter = TaskListItemsAdapter(this@TaskListActivity, mBoardDetails.taskList)
+        rv_task_list.adapter = adapter
     }
 }

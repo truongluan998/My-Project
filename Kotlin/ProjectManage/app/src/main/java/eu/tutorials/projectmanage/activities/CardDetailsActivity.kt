@@ -167,11 +167,12 @@ class CardDetailsActivity : BaseActivity() {
                     mBoardDetails.taskList[mTaskListPosition].cards[mCardPosition].assignedTo.remove(user.id)
 
                     for (i in mMembersDetailsList.indices) {
-                        if(mMembersDetailsList[i].id == user.id) {
+                        if (mMembersDetailsList[i].id == user.id) {
                             mMembersDetailsList[i].selected = false
                         }
                     }
                 }
+
                 setupSelectedMembersList()
             }
         }
@@ -276,7 +277,7 @@ class CardDetailsActivity : BaseActivity() {
             rv_selected_members_list.layoutManager = GridLayoutManager(
                 this, 6
             )
-            val adapter = CardMemberListItemsAdapter(this, selectedMembersList)
+            val adapter = CardMemberListItemsAdapter(this, selectedMembersList, true)
 
             rv_selected_members_list.adapter = adapter
 

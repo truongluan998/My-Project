@@ -7,29 +7,28 @@ data class SelectedMembers (
     val id: String = "",
     val image: String = ""
 ): Parcelable{
-    constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
-        parcel.readString()!!
-    ) {
-    }
+    constructor(source: Parcel) : this(
+        source.readString()!!,
+        source.readString()!!
+    )
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeString(image)
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeString(id)
+        writeString(image)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<SelectedMembers> {
-        override fun createFromParcel(parcel: Parcel): SelectedMembers {
-            return SelectedMembers(parcel)
-        }
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<SelectedMembers> =
+            object : Parcelable.Creator<SelectedMembers> {
+                override fun createFromParcel(source: Parcel): SelectedMembers =
+                    SelectedMembers(source)
 
-        override fun newArray(size: Int): Array<SelectedMembers?> {
-            return arrayOfNulls(size)
-        }
+                override fun newArray(size: Int): Array<SelectedMembers?> = arrayOfNulls(size)
+            }
     }
-
 }
