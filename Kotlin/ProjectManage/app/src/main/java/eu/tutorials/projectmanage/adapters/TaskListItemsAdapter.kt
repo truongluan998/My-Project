@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import eu.tutorials.projectmanage.R
 import eu.tutorials.projectmanage.activities.TaskListActivity
 import eu.tutorials.projectmanage.models.Task
-import io.opencensus.resource.Resource
 import kotlinx.android.synthetic.main.item_task.view.*
 import java.util.*
 import kotlin.collections.ArrayList

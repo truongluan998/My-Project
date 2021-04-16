@@ -10,7 +10,7 @@ data class User
     val email: String = "",
     val image: String = "",
     val mobile: Long = 0,
-    val dcmToken: String = "",
+    val fcmToken: String = "",
     var selected: Boolean = false
 ): Parcelable {
     constructor(parcel: Parcel) : this(
@@ -32,7 +32,7 @@ data class User
         writeString(email)
         writeString(image)
         writeLong(mobile)
-        writeString(dcmToken)
+        writeString(fcmToken)
     }
 
     companion object {
