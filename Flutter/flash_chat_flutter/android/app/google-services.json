@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "760848970214",
+    "project_id": "flash-chat-de426",
+    "storage_bucket": "flash-chat-de426.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760848970214:android:a9b74cb115c2ab8dace627",
+        "android_client_info": {
+          "package_name": "co.hongluan.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760848970214-1j2m53hff6qe5daoia7o68iha3fp33er.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH_lf2QZFVD6F4K95CieDWFSWW2OrvypM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760848970214-1j2m53hff6qe5daoia7o68iha3fp33er.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
