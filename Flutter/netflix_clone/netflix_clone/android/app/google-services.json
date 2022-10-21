@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "363090948775",
+    "project_id": "projectmanage-9940b",
+    "storage_bucket": "projectmanage-9940b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363090948775:android:0eee43b6d0ae761eafa182",
+        "android_client_info": {
+          "package_name": "com.example.netflix_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363090948775-gdf4gjlqhvnmul59gt39cars1cum689i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.netflix_clone",
+            "certificate_hash": "0c4dc715715bacec4d50515b886ebfb8feeb4474"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgdDvK6Dj6mHjoRXCvVvFPACyRc7bEM0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363090948775-l9bguasb435fjikldevskh5j29jakol0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
