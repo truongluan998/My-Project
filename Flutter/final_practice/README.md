@@ -1,16 +1,6 @@
 # final_practice
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- App using the TMDBMovie API to do tasks like getting movie listings, tv shows, actors, and displaying details. Search movies, tvshows, and actors. 
+- In the app, I use firebase for authentication and data storage.
+- In film details, there will be a film overview, watch the trailer, add to the favorites list, reviews, cast, and cast will be linked with actors' details. In addition, the app also has the function of checking the internet and many other small tasks.
+- Libraries used like BLoC pattern, Simple Dependency Injection, Firebase, Global Configuration, Shared Preferences, After Layout, and Easy Localization,...
