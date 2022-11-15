@@ -1,34 +1,14 @@
-import 'package:login_project/model/user.dart';
-import 'package:login_project/services/authentication_service.dart';
+import 'package:login_project/repository/authentication_repository.dart';
+import '../dependencies/app_dependencies.dart';
+import '../model/user.dart';
 
-class AuthenticationBusiness extends AuthenticationService {
-  @override
-  Future<bool> checkUser(User? user) async {
-    if (user != null &&
-        user.accessToken != null &&
-        user.accessToken == 'access_token') {
-      return true;
-    } else {
-      return false;
-    }
-  }
+class AuthenticationBusiness {
+  final _authenticationService =
+      AppDependencies.getIt.get<AuthenticationRepository>();
 
-  @override
-  Future<User?> loginUser(
-    String? email,
-    String? password,
-  ) async {
-    try {
-      if (email != null &&
-          password != null &&
-          (email == 'concung@gmail.com' && password == 'concung123')) {
-        final user = User(1, email, password, 'access_token');
-        return user;
-      } else {
-        return null;
-      }
-    } catch (_) {
-      return null;
-    }
-  }
+  Future<User?> loginUser(String? email, String password) async =>
+      await _authenticationService.loginUser(email, password);
+
+  Future<bool> checkUser(User? user) async =>
+      await _authenticationService.checkUser(user);
 }

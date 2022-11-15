@@ -1,6 +1,35 @@
 import 'package:login_project/model/user.dart';
 
-abstract class AuthenticationService {
-  Future<User?> loginUser(String? email, String? password);
-  Future<bool> checkUser(User? user);
+import '../repository/authentication_repository.dart';
+
+class AuthenticationService extends AuthenticationRepository {
+  @override
+  Future<bool> checkUser(User? user) async {
+    if (user != null &&
+        user.accessToken != null &&
+        user.accessToken == 'access_token') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future<User?> loginUser(
+    String? email,
+    String? password,
+  ) async {
+    try {
+      if (email != null &&
+          password != null &&
+          (email == 'concung@gmail.com' && password == 'concung123')) {
+        final user = User(1, email, password, 'access_token');
+        return user;
+      } else {
+        return null;
+      }
+    } catch (_) {
+      return null;
+    }
+  }
 }

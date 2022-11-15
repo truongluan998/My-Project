@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:login_project/business/authentication_business.dart';
+import 'package:login_project/business/db_business.dart';
 import 'package:login_project/dependencies/app_dependencies.dart';
-import 'package:login_project/repositories/authentication_repository.dart';
-import 'package:login_project/repositories/db_repository.dart';
 import 'package:login_project/utils/enum.dart';
 
 import '../utils/validator.dart';
 
 class AuthenticationController extends ChangeNotifier {
-  final _authenticationRepository =
-      AppDependencies.getIt.get<AuthenticationRepository>();
-  final _dbRepository = AppDependencies.getIt.get<DBRepository>();
+  final _authenticationBusiness =
+      AppDependencies.getIt.get<AuthenticationBusiness>();
+  final _dbBusiness = AppDependencies.getIt.get<DBBusiness>();
 
   ListStatusAuthentication statusAuthentication =
       ListStatusAuthentication.initial;
@@ -22,9 +22,9 @@ class AuthenticationController extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       await Future.delayed(const Duration(milliseconds: 1000));
-      final user = await _dbRepository.getUser();
+      final user = await _dbBusiness.getUser();
       if (user != null) {
-        final isValidUser = await _authenticationRepository.checkUser(user);
+        final isValidUser = await _authenticationBusiness.checkUser(user);
         if (isValidUser) {
           isLoading = false;
           statusAuthentication = ListStatusAuthentication.logged;
@@ -50,13 +50,13 @@ class AuthenticationController extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     await Future.delayed(const Duration(milliseconds: 1000));
-    final userData = await _authenticationRepository.loginUser(email, password);
+    final userData = await _authenticationBusiness.loginUser(email, password);
     if (!Validators.isValidEmail(email)) {
       isLoading = false;
       statusAuthentication = ListStatusAuthentication.wrongEmail;
       notifyListeners();
     } else if (userData != null) {
-      await _dbRepository.newUser(userData).whenComplete(() {
+      await _dbBusiness.newUser(userData).whenComplete(() {
         isLoading = false;
         statusAuthentication = ListStatusAuthentication.success;
         notifyListeners();
