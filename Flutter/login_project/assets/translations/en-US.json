@@ -1,0 +1,26 @@
+{
+  "login_screen": {
+    "login_title": "Login",
+    "login_email": "E-mail",
+    "login_email_hint": "Your email or phone",
+    "login_password": "Password",
+    "login_password_hint": "Password",
+    "login_forgot_password": "Forgot password?",
+    "login_do_not_have_account": "Don’t have an account?",
+    "sign_up": "Sign Up",
+    "sign_in_with": "Sign in with",
+    "facebook": "Facebook",
+    "google": "Google",
+    "login_fail": "Đăng nhập không thành công",
+    "wrong_email": "Email không hợp lệ"
+  },
+  "category_screen": {
+    "category_ipad" : "Ipad",
+    "category_mini" : "Mini",
+    "category_new_mini_2022" : "New Mini 2022",
+    "category_sort_by" : "Sort by: ",
+    "category_popular" : "Popular",
+    "category_buy" : "Buy",
+    "category_pull_down" : "Error, pull down to try again!"
+  }
+}
