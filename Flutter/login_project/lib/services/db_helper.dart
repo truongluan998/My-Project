@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:login_project/model/user.dart';
-import 'package:login_project/services/db_service.dart';
+import 'package:login_project/repository/db_repository.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DBHelper extends DbService {
+class DBHelper extends DBRepository {
   Database? _database;
 
   Future<Database> get database async {

@@ -1,6 +1,6 @@
 import '../model/user.dart';
 
-abstract class DbService {
+abstract class DBRepository {
   Future<void> newUser(User user);
   Future<User?> getUser();
 }
