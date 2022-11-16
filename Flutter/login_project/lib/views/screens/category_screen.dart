@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login_project/constants/constants.dart';
-import 'package:login_project/controller/categories_controller.dart';
+import 'package:login_project/controllers/categories_controller.dart';
 import 'package:login_project/dependencies/app_dependencies.dart';
 import 'package:login_project/theme/login_app_color.dart';
-import 'package:login_project/widget/custom_back_button.dart';
-import 'package:login_project/widget/custom_title.dart';
+import 'package:login_project/views/widget/custom_back_button.dart';
+import 'package:login_project/views/widget/custom_title.dart';
 import 'package:easy_localization/easy_localization.dart' as localized;
-import 'package:login_project/widget/shimmer/shimmer_category_item.dart';
+import 'package:login_project/views/widget/shimmer/shimmer_category_item.dart';
 import 'package:provider/provider.dart';
 
-import '../config/size_config.dart';
-import '../config/theme_config.dart';
-import '../utils/utils.dart';
+import '../../config/size_config.dart';
+import '../../config/theme_config.dart';
+import '../../utils/utils.dart';
 import '../widget/category/categories_item_card.dart';
 import '../widget/category/custom_text_icon_button.dart';
 
@@ -137,14 +137,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             } else if (!data.getCategoriesStatus) {
                               return SizedBox(
                                 height: double.infinity,
-                                child: SingleChildScrollView(
-                                  physics: const AlwaysScrollableScrollPhysics(),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: SizeConfig.screenHeight! * Dimens.size0Dot3),
-                                      child: CustomTitle(
-                                        title: localized.tr('category_screen.category_pull_down'),
-                                        textTheme: ThemeConfig.textTheme.subtitle2,
+                                child: ScrollConfiguration(
+                                  behavior: const ScrollBehavior(),
+                                  child: SingleChildScrollView(
+                                    physics: const AlwaysScrollableScrollPhysics(),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: SizeConfig.screenHeight! * Dimens.size0Dot3),
+                                        child: CustomTitle(
+                                          title: localized.tr('category_screen.category_pull_down'),
+                                          textTheme: ThemeConfig.textTheme.subtitle2,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -152,6 +155,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               );
                             } else {
                               return ListView.builder(
+                                physics: const BouncingScrollPhysics(),
                                 itemCount: data.categoriesResponse.data?.length,
                                 padding: const EdgeInsets.symmetric(vertical: Dimens.size8),
                                 itemBuilder: (BuildContext context, int index) {

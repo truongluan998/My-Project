@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
-import '../theme/login_app_color.dart';
+import '../../constants/constants.dart';
+import '../../theme/login_app_color.dart';
 
 class CustomBackButton extends StatelessWidget {
   final VoidCallback press;

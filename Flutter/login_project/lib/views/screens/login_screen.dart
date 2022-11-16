@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:login_project/config/theme_config.dart';
-import 'package:login_project/controller/authentication_controller.dart';
+import 'package:login_project/controllers/authentication_controller.dart';
 import 'package:login_project/dependencies/app_dependencies.dart';
 import 'package:login_project/theme/login_app_color.dart';
 import 'package:login_project/utils/utils.dart';
-import 'package:login_project/widget/custom_circular_progress_indicator.dart';
+import 'package:login_project/views//widget/custom_circular_progress_indicator.dart';
 import 'package:provider/provider.dart';
 
-import '../config/size_config.dart';
-import '../constants/constants.dart';
-import '../utils/enum.dart';
+import '../../config/size_config.dart';
+import '../../constants/constants.dart';
+import '../../utils/enum.dart';
 import '../widget/custom_title.dart';
 import '../widget/custom_back_button.dart';
 import '../widget/custom_action_button.dart';
@@ -184,6 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               onPressed: () => data.showPassword(),
                                               icon: Icon(
                                                 data.isShowPass ? Icons.visibility_off : Icons.visibility,
+                                                color: LoginAppColor.textGrayColor,
                                               ),
                                             ),
                                             hintStyle: ThemeConfig.textTheme.subtitle1,

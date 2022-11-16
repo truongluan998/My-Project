@@ -1,4 +1,4 @@
-import 'package:login_project/model/categories.dart';
+import 'package:login_project/models/categories.dart';
 
 import '../dependencies/app_dependencies.dart';
 import '../repository/categories_repository.dart';

@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:login_project/screens/login_screen.dart';
+import 'package:login_project/views/screens/login_screen.dart';
 import 'package:login_project/theme/login_app_theme.dart';
 
 import 'router/app_router.dart';

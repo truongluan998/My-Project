@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../config/size_config.dart';
-import '../../config/theme_config.dart';
-import '../../constants/constants.dart';
-import '../../theme/login_app_color.dart';
+import '../../../config/size_config.dart';
+import '../../../config/theme_config.dart';
+import '../../../constants/constants.dart';
+import '../../../theme/login_app_color.dart';
 import '../custom_title.dart';
 
 class LoginWithSocialNetworkButton extends StatelessWidget {

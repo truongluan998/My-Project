@@ -1,6 +1,6 @@
 import 'package:login_project/repository/authentication_repository.dart';
 import '../dependencies/app_dependencies.dart';
-import '../model/user.dart';
+import '../models/user.dart';
 
 class AuthenticationBusiness {
   final _authenticationService = AppDependencies.getIt.get<AuthenticationRepository>();

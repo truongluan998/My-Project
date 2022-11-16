@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:login_project/constants/constants.dart';
 
-import '../model/categories.dart';
+import '../models/categories.dart';
 import 'network_response.dart';
 
 class RestUtils {

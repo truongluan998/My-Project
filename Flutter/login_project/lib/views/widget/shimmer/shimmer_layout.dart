@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../theme/login_app_color.dart';
+import '../../../theme/login_app_color.dart';
 
 class ShimmerLayout extends StatelessWidget {
   final Decoration? decoration;

@@ -1,4 +1,4 @@
-import '../model/categories.dart';
+import '../models/categories.dart';
 
 abstract class CategoriesRepository {
   Future<CategoriesResponse?> getCategories ();

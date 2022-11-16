@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:login_project/theme/login_app_color.dart';
-import 'package:login_project/widget/shimmer/shimmer_layout.dart';
+import 'package:login_project/views/widget/shimmer/shimmer_layout.dart';
 
-import '../../config/size_config.dart';
-import '../../constants/constants.dart';
+import '../../../config/size_config.dart';
+import '../../../constants/constants.dart';
 
 class CustomShimmer extends StatelessWidget {
   const CustomShimmer({Key? key}) : super(key: key);

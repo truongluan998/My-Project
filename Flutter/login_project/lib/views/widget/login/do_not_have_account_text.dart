@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../config/theme_config.dart';
-import '../../theme/login_app_color.dart';
+import '../../../config/theme_config.dart';
+import '../../../theme/login_app_color.dart';
 
 class DoNotHaveAccountText extends StatelessWidget {
   final VoidCallback press;

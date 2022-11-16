@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:login_project/model/user.dart';
+import 'package:login_project/models/user.dart';
 import 'package:login_project/repository/db_repository.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../constants/constants.dart';
 
 class DBHelper extends DBRepository {
   Database? _database;
@@ -18,7 +20,7 @@ class DBHelper extends DBRepository {
 
   _initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "UserDatabase.db");
+    String path = join(documentsDirectory.path, "${DatabaseAsset.databaseName}.db");
     return await openDatabase(path, version: 1, onOpen: (db) {}, onCreate: (
       Database db,
       int version,
