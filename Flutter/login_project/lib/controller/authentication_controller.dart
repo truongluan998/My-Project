@@ -60,6 +60,10 @@ class AuthenticationController extends ChangeNotifier {
         isLoading = false;
         statusAuthentication = ListStatusAuthentication.success;
         notifyListeners();
+      }).onError((error, stackTrace) {
+        isLoading = false;
+        statusAuthentication = ListStatusAuthentication.fail;
+        notifyListeners();
       });
     } else {
       isLoading = false;

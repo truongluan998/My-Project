@@ -41,7 +41,7 @@ class RestUtils {
     dio.options.baseUrl = API.domain;
     dio.options.connectTimeout = 1000 * 15;
     dio.options.receiveTimeout = 1000 * 15;
-    /// Handle in future
+    /// TODO: Handle in future
     // dio.options.headers["UserID"] = "condung_id_1";
     // dio.options.headers["Authorization"] = "Bearer $accessToken";
     // dio.interceptors.clear();

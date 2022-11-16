@@ -5,11 +5,15 @@ import '../repository/authentication_repository.dart';
 class AuthenticationService extends AuthenticationRepository {
   @override
   Future<bool> checkUser(User? user) async {
-    if (user != null &&
-        user.accessToken != null &&
-        user.accessToken == 'access_token') {
-      return true;
-    } else {
+    try {
+      if (user != null &&
+          user.accessToken != null &&
+          user.accessToken == 'access_token') {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (_) {
       return false;
     }
   }

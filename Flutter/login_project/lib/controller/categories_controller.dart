@@ -10,7 +10,7 @@ class CategoriesController extends ChangeNotifier{
 
   var categoriesResponse = CategoriesResponse();
   bool isLoading = false;
-  bool getCategoriesFalse = false;
+  bool getCategoriesStatus = false;
 
   Future<void> getCategories () async {
     isLoading = true;
@@ -19,11 +19,11 @@ class CategoriesController extends ChangeNotifier{
     if (response != null) {
       categoriesResponse = response;
       isLoading = false;
-      getCategoriesFalse = false;
+      getCategoriesStatus = true;
       notifyListeners();
     } else {
       isLoading = false;
-      getCategoriesFalse = true;
+      getCategoriesStatus = false;
       notifyListeners();
     }
   }
