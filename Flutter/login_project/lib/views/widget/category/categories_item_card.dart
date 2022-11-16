@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:login_project/widget/shimmer/shimmer_layout.dart';
+import 'package:login_project/views/widget/shimmer/shimmer_layout.dart';
 
-import '../../config/size_config.dart';
-import '../../config/theme_config.dart';
-import '../../constants/constants.dart';
-import '../../theme/login_app_color.dart';
+import '../../../config/size_config.dart';
+import '../../../config/theme_config.dart';
+import '../../../constants/constants.dart';
+import '../../../theme/login_app_color.dart';
 import '../custom_action_button.dart';
 import '../custom_title.dart';
 import 'custom_rating_star.dart';
@@ -51,16 +51,21 @@ class CategoriesItemCard extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
                   placeholder: (context, url) => ShimmerLayout(
-                    height: SizeConfig.screenHeight! * Dimens.heightProductImage,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimens.size16),
+                    height: SizeConfig.screenHeight! * Dimens.heightPlaceholderProductImage,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(Dimens.size16),
+                        topRight: Radius.circular(Dimens.size16),
+                        bottomLeft: Radius.circular(Dimens.size10),
+                        bottomRight: Radius.circular(Dimens.size10),
+                      ),
                       color: LoginAppColor.shadowBackButtonColor,
                     ),
                   ),
                   errorWidget: (context, url, error) => Image.asset(
                     ImagesAsset.errorAsset,
                     fit: BoxFit.cover,
-                    height: SizeConfig.screenHeight! * Dimens.heightProductImage,
+                    height: SizeConfig.screenHeight! * Dimens.heightPlaceholderProductImage,
                     width: double.infinity,
                   ),
                 ),

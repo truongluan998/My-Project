@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_project/screens/category_screen.dart';
-import 'package:login_project/screens/login_screen.dart';
+import 'package:login_project/views/screens/category_screen.dart';
+import 'package:login_project/views/screens/login_screen.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {

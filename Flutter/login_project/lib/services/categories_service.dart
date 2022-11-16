@@ -1,5 +1,5 @@
 import 'package:login_project/dependencies/app_dependencies.dart';
-import 'package:login_project/model/categories.dart';
+import 'package:login_project/models/categories.dart';
 
 import '../../utils/rest_utils.dart';
 import '../repository/categories_repository.dart';

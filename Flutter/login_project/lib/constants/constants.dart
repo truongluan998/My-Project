@@ -51,6 +51,7 @@ class Dimens {
   static const double opa0Dot4 = 0.4;
 
   static const double heightProductImage = 0.20337438423;
+  static const double heightPlaceholderProductImage = 0.21;
 }
 
 class ImagesAsset {
@@ -64,4 +65,8 @@ class ImagesAsset {
 
 class API {
   static const String domain = 'https://72d3dc39-3de8-44cc-b152-201a739bc7c8.mock.pstmn.io/v1/';
+}
+
+class DatabaseAsset {
+  static const String databaseName = 'UserDatabase';
 }

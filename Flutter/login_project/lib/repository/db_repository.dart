@@ -1,4 +1,4 @@
-import '../model/user.dart';
+import '../models/user.dart';
 
 abstract class DBRepository {
   Future<void> newUser(User user);

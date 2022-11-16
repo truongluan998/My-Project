@@ -1,4 +1,4 @@
-import 'package:login_project/model/user.dart';
+import 'package:login_project/models/user.dart';
 import 'package:login_project/repository/db_repository.dart';
 import '../dependencies/app_dependencies.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../config/theme_config.dart';
-import '../../theme/login_app_color.dart';
+import '../../../config/theme_config.dart';
+import '../../../theme/login_app_color.dart';
 
 class CustomDividerAndText extends StatelessWidget {
   final String title;
