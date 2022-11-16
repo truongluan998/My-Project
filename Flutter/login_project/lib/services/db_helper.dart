@@ -33,14 +33,21 @@ class DBHelper extends DBRepository {
   @override
   Future<void> newUser(User user) async {
     final db = await database;
-    await db.insert("User", user.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    try {
+      await db.insert("User", user.toJson(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    } catch (_) {}
   }
 
   @override
   Future<User?> getUser() async {
     final db = await database;
-    var res = await db.rawQuery("SELECT * FROM User Where access_token='access_token'");
-    return res.isNotEmpty ? User.fromJson(res.first) : null;
+    try {
+      final res = await db
+          .rawQuery("SELECT * FROM User Where access_token='access_token'");
+      return res.isNotEmpty ? User.fromJson(res.first) : null;
+    } catch (_) {
+      return null;
+    }
   }
 }

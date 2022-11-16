@@ -9,14 +9,10 @@ class CategoriesService extends CategoriesRepository {
 
   @override
   Future<CategoriesResponse?> getCategories() async {
-    try {
-      final response = await restUtils.getDataFromAPI('cc_test');
-      if (response != null) {
-        return response.body;
-      } else {
-        return null;
-      }
-    } catch (error) {
+    final response = await restUtils.getDataFromAPI('cc_test');
+    if (response != null) {
+      return response.body;
+    } else {
       return null;
     }
   }

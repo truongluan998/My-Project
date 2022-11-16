@@ -139,7 +139,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           builder: (context, data, child) {
                             if (data.isLoading) {
                               return const ShimmerCategoryItem();
-                            } else if (data.getCategoriesFalse) {
+                            } else if (!data.getCategoriesStatus) {
                               return SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
