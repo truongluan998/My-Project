@@ -7,12 +7,10 @@ import 'package:login_project/utils/enum.dart';
 import '../utils/validator.dart';
 
 class AuthenticationController extends ChangeNotifier {
-  final _authenticationBusiness =
-      AppDependencies.getIt.get<AuthenticationBusiness>();
+  final _authenticationBusiness = AppDependencies.getIt.get<AuthenticationBusiness>();
   final _dbBusiness = AppDependencies.getIt.get<DBBusiness>();
 
-  ListStatusAuthentication statusAuthentication =
-      ListStatusAuthentication.initial;
+  ListStatusAuthentication statusAuthentication = ListStatusAuthentication.initial;
 
   bool isLoading = false;
   bool isShowPass = false;

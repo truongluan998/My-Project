@@ -19,8 +19,10 @@ class DBHelper extends DBRepository {
   _initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "UserDatabase.db");
-    return await openDatabase(path, version: 1, onOpen: (db) {},
-        onCreate: (Database db, int version) async {
+    return await openDatabase(path, version: 1, onOpen: (db) {}, onCreate: (
+      Database db,
+      int version,
+    ) async {
       await db.execute("CREATE TABLE User ("
           "id INTEGER,"
           "email TEXT,"
@@ -34,8 +36,7 @@ class DBHelper extends DBRepository {
   Future<void> newUser(User user) async {
     final db = await database;
     try {
-      await db.insert("User", user.toJson(),
-          conflictAlgorithm: ConflictAlgorithm.replace);
+      await db.insert("User", user.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (_) {}
   }
 
@@ -43,8 +44,7 @@ class DBHelper extends DBRepository {
   Future<User?> getUser() async {
     final db = await database;
     try {
-      final res = await db
-          .rawQuery("SELECT * FROM User Where access_token='access_token'");
+      final res = await db.rawQuery("SELECT * FROM User Where access_token='access_token'");
       return res.isNotEmpty ? User.fromJson(res.first) : null;
     } catch (_) {
       return null;

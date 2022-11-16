@@ -27,7 +27,6 @@ class CustomBackButton extends StatelessWidget {
               side: isShowBorder
                   ? const BorderSide(color: LoginAppColor.balloonTwoColor)
                   : const BorderSide(color: LoginAppColor.whiteColor),
-
             ),
           ),
           elevation: MaterialStateProperty.all(Dimens.size4),

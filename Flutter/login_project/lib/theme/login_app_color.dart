@@ -14,7 +14,7 @@ class LoginAppColor {
   static const Color textBlackColor = Color(0xFF151C26);
   static const Color textGrayColor = Color(0xFF5B5B5E);
   static const Color shadowActionButtonColor = Color(0xF57A81BE);
-  static const Color dividerColor = Color(0xF5B3B3B3);
+  static const Color dividerColor = Color(0xFFB3B3B3);
   static const Color textLightBlackColor = Color(0xFF272D2F);
   static const Color ratingColor = Color(0xFFFFBE00);
 }

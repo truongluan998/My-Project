@@ -7,7 +7,7 @@ class AppRouter {
     switch (settings.name) {
       case LoginScreen.routeName:
         return _createAnimationRoute(const LoginScreen(), settings);
-      case CategoryScreen.routeName :
+      case CategoryScreen.routeName:
         return _createAnimationRoute(const CategoryScreen(), settings);
       default:
         return _errorRoute();
@@ -24,17 +24,16 @@ class AppRouter {
       );
 }
 
-Route _createAnimationRoute(Widget screen, RouteSettings settings) =>
-    PageRouteBuilder(
+Route _createAnimationRoute(Widget screen, RouteSettings settings) => PageRouteBuilder(
       transitionDuration: const Duration(
-        milliseconds: 700,
+        milliseconds: 500,
       ),
       settings: settings,
       pageBuilder: (context, animation, secondaryAnimation) => screen,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1, 0);
         const end = Offset.zero;
-        const curve = Curves.ease;
+        const curve = Curves.easeIn;
 
         final tween = Tween(begin: begin, end: end).chain(
           CurveTween(curve: curve),

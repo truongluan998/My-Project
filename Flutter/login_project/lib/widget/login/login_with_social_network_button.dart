@@ -34,9 +34,7 @@ class LoginWithSocialNetworkButton extends StatelessWidget {
           ),
           elevation: MaterialStateProperty.all(Dimens.size16),
           shadowColor: MaterialStateProperty.all(
-            LoginAppColor.shadowBackButtonColor.withOpacity(
-              Dimens.opa0Dot2,
-            ),
+            LoginAppColor.shadowBackButtonColor.withOpacity(Dimens.opa0Dot2),
           ),
         ),
         child: FittedBox(

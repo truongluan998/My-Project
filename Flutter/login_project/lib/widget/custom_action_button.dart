@@ -27,8 +27,7 @@ class CustomActionButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: press,
         style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all(LoginAppColor.balloonTwoColor),
+          backgroundColor: MaterialStateProperty.all(LoginAppColor.balloonTwoColor),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(Dimens.size28),
@@ -36,9 +35,7 @@ class CustomActionButton extends StatelessWidget {
           ),
           elevation: MaterialStateProperty.all(Dimens.size4),
           shadowColor: MaterialStateProperty.all(
-            LoginAppColor.shadowActionButtonColor.withOpacity(
-              Dimens.opa0Dot1,
-            ),
+            LoginAppColor.shadowActionButtonColor.withOpacity(Dimens.opa0Dot1),
           ),
         ),
         child: CustomTitle(

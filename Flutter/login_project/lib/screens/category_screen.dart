@@ -44,8 +44,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (SizeConfig.screenWidth == null ||
-        ThemeConfig.textTheme.bodyText1 == null) {
+    if (SizeConfig.screenWidth == null || ThemeConfig.textTheme.bodyText1 == null) {
       Utils.setConfigApp(context);
     }
 
@@ -85,8 +84,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTitle(
-                          title: localized.tr('category_screen.category_ipad'),
-                          textTheme: ThemeConfig.textTheme.headline2),
+                        title: localized.tr('category_screen.category_ipad'),
+                        textTheme: ThemeConfig.textTheme.headline2,
+                      ),
                       CustomTitle(
                         title: localized.tr('category_screen.category_mini'),
                         textTheme: ThemeConfig.textTheme.headline2!.copyWith(
@@ -98,8 +98,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   ),
                   const SizedBox(height: Dimens.size4),
                   CustomTitle(
-                    title:
-                        localized.tr('category_screen.category_new_mini_2022'),
+                    title: localized.tr('category_screen.category_new_mini_2022'),
                     textTheme: ThemeConfig.textTheme.bodyText2!.copyWith(
                       color: LoginAppColor.titleTextColor,
                     ),
@@ -111,17 +110,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         TextButton(
                           onPressed: () {},
                           child: CustomTitle(
-                            title: localized
-                                .tr('category_screen.category_sort_by'),
-                            textTheme:
-                                ThemeConfig.textTheme.bodyText2!.copyWith(
+                            title: localized.tr('category_screen.category_sort_by'),
+                            textTheme: ThemeConfig.textTheme.bodyText2!.copyWith(
                               color: LoginAppColor.textBlackColor,
                             ),
                           ),
                         ),
                         CustomTextIconButton(
-                          title:
-                              localized.tr('category_screen.category_popular'),
+                          title: localized.tr('category_screen.category_popular'),
                           press: () {},
                         ),
                         const Spacer(),
@@ -133,43 +129,37 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     value: _categoriesController,
                     child: Expanded(
                       child: RefreshIndicator(
-                        onRefresh: () async =>
-                            await _categoriesController.getCategories(),
+                        onRefresh: () async => await _categoriesController.getCategories(),
                         child: Consumer<CategoriesController>(
                           builder: (context, data, child) {
                             if (data.isLoading) {
                               return const ShimmerCategoryItem();
                             } else if (!data.getCategoriesStatus) {
                               return SizedBox(
-                                width: double.infinity,
                                 height: double.infinity,
                                 child: SingleChildScrollView(
-                                  physics:
-                                      const AlwaysScrollableScrollPhysics(),
-                                  child: CustomTitle(
-                                    title: localized.tr(
-                                        'category_screen.category_pull_down'),
-                                    textTheme: ThemeConfig.textTheme.subtitle2,
+                                  physics: const AlwaysScrollableScrollPhysics(),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: SizeConfig.screenHeight! * Dimens.size0Dot3),
+                                      child: CustomTitle(
+                                        title: localized.tr('category_screen.category_pull_down'),
+                                        textTheme: ThemeConfig.textTheme.subtitle2,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );
                             } else {
                               return ListView.builder(
-                                itemCount:
-                                    data.categoriesResponse.data?.length,
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: Dimens.size8),
+                                itemCount: data.categoriesResponse.data?.length,
+                                padding: const EdgeInsets.symmetric(vertical: Dimens.size8),
                                 itemBuilder: (BuildContext context, int index) {
                                   return CategoriesItemCard(
-                                    categoryName: data.categoriesResponse
-                                        .data![index].deviceName!,
-                                    categoryPrice: data
-                                        .categoriesResponse.data![index].price!,
-                                    rating: data
-                                        .categoriesResponse.data![index].rate
-                                        .toString(),
-                                    imageUrl: data
-                                        .categoriesResponse.data![index].url!,
+                                    categoryName: data.categoriesResponse.data![index].deviceName!,
+                                    categoryPrice: data.categoriesResponse.data![index].price!,
+                                    rating: data.categoriesResponse.data![index].rate.toString(),
+                                    imageUrl: data.categoriesResponse.data![index].url!,
                                     press: () {},
                                   );
                                 },
