@@ -3,6 +3,7 @@ class Dimens {
   static const double size0Dot04 = 0.04;
   static const double size0Dot045 = 0.045;
   static const double size0Dot13 = 0.13;
+  static const double size0Dot3 = 0.3;
   static const double size0Dot392 = 0.392;
   static const double size0Dot66 = 0.66;
   static const double size1 = 1.0;
@@ -47,6 +48,7 @@ class Dimens {
   static const double opa0Dot1 = 0.1;
   static const double opa0Dot2 = 0.2;
   static const double opa0Dot3 = 0.3;
+  static const double opa0Dot4 = 0.4;
 
   static const double heightProductImage = 0.20337438423;
 }
@@ -57,6 +59,7 @@ class ImagesAsset {
   static const String googleAsset = '${baseAssets}google.svg';
   static const String bannerAsset = '${baseAssets}banner.png';
   static const String filterIconAsset = '${baseAssets}filter_icon.svg';
+  static const String errorAsset = '${baseAssets}error.jpg';
 }
 
 class API {

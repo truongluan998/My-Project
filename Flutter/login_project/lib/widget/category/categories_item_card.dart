@@ -30,13 +30,13 @@ class CategoriesItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        side: const BorderSide(
-          color: LoginAppColor.dividerColor,
+        side: BorderSide(
+          color: LoginAppColor.dividerColor.withOpacity(Dimens.opa0Dot3),
           width: Dimens.size1,
         ),
         borderRadius: BorderRadius.circular(Dimens.size16),
       ),
-      shadowColor: LoginAppColor.shadowBackButtonColor,
+      shadowColor: LoginAppColor.shadowBackButtonColor.withOpacity(Dimens.opa0Dot2),
       child: Stack(
         children: [
           Column(
@@ -50,28 +50,19 @@ class CategoriesItemCard extends StatelessWidget {
                 ),
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
-                  placeholder: (context, url) => SizedBox(
-                    height:
-                        SizeConfig.screenHeight! * Dimens.heightProductImage,
-                    width: double.infinity,
-                    child: ShimmerLayout(
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimens.size16),
-                        color: LoginAppColor.shadowBackButtonColor,
-                      ),
+                  placeholder: (context, url) => ShimmerLayout(
+                    height: SizeConfig.screenHeight! * Dimens.heightProductImage,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimens.size16),
+                      color: LoginAppColor.shadowBackButtonColor,
                     ),
                   ),
-                  errorWidget: (context, url, error) => SizedBox(
-                    height:
-                        SizeConfig.screenHeight! * Dimens.heightProductImage,
+                  errorWidget: (context, url, error) => Image.asset(
+                    ImagesAsset.errorAsset,
+                    fit: BoxFit.cover,
+                    height: SizeConfig.screenHeight! * Dimens.heightProductImage,
                     width: double.infinity,
-                    child: const Center(
-                      child: Icon(Icons.error),
-                    ),
                   ),
-                  // fadeOutDuration: const Duration(seconds: 1),
-                  // fadeInDuration: const Duration(seconds: 3),
                 ),
               ),
               Padding(

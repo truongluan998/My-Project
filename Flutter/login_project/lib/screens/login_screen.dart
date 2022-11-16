@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:login_project/config/theme_config.dart';
@@ -43,8 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _authenticationController =
-        AppDependencies.getIt.get<AuthenticationController>();
+    _authenticationController = AppDependencies.getIt.get<AuthenticationController>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await _checkValidUser();
     });
@@ -52,8 +49,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _checkValidUser() async {
     await _authenticationController.checkUser();
-    if (_authenticationController.statusAuthentication ==
-        ListStatusAuthentication.logged) {
+    if (_authenticationController.statusAuthentication == ListStatusAuthentication.logged) {
+      if (!mounted) return;
       Navigator.pushNamedAndRemoveUntil(
         context,
         '/category',
@@ -65,8 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Utils.setConfigApp(context);
-    if (SizeConfig.screenWidth == null ||
-        ThemeConfig.textTheme.bodyText1 == null) {
+    if (SizeConfig.screenWidth == null || ThemeConfig.textTheme.bodyText1 == null) {
       Utils.setConfigApp(context);
     }
 
@@ -78,10 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Stack(
             children: [
               Positioned(
-                top: SizeConfig.screenHeight! *
-                    Dimens.posNegativeTopBalloonThree,
-                left: SizeConfig.screenWidth! *
-                    Dimens.posNegativeLeftBalloonThree,
+                top: SizeConfig.screenHeight! * Dimens.posNegativeTopBalloonThree,
+                left: SizeConfig.screenWidth! * Dimens.posNegativeLeftBalloonThree,
                 child: Container(
                   width: Dimens.size96,
                   height: Dimens.size96,
@@ -96,8 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Positioned(
                 top: SizeConfig.screenHeight! * Dimens.posNegativeTopBalloonOne,
-                left:
-                    SizeConfig.screenWidth! * Dimens.posNegativeLeftBalloonOne,
+                left: SizeConfig.screenWidth! * Dimens.posNegativeLeftBalloonOne,
                 child: const CustomBalloons(
                   width: Dimens.size165,
                   height: Dimens.size165,
@@ -132,144 +125,93 @@ class _LoginScreenState extends State<LoginScreen> {
                                   CustomBackButton(
                                     press: () {},
                                   ),
-                                  SizedBox(
-                                    height: SizeConfig.screenHeight! *
-                                        Dimens.size0Dot13,
-                                  ),
+                                  SizedBox(height: SizeConfig.screenHeight! * Dimens.size0Dot13),
                                   CustomTitle(
                                     title: tr('login_screen.login_title'),
                                     textTheme: ThemeConfig.textTheme.headline2,
                                   ),
-                                  SizedBox(
-                                    height: SizeConfig.screenHeight! *
-                                        Dimens.size0Dot04,
-                                  ),
+                                  SizedBox(height: SizeConfig.screenHeight! * Dimens.size0Dot04),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       CustomTitle(
                                         title: tr('login_screen.login_email'),
-                                        textTheme:
-                                            ThemeConfig.textTheme.headline6,
+                                        textTheme: ThemeConfig.textTheme.headline6,
                                       ),
                                       const SizedBox(height: Dimens.size4),
                                       Material(
                                         elevation: Dimens.size1,
                                         color: LoginAppColor.whiteColor,
-                                        shadowColor: LoginAppColor
-                                            .textFormFieldShadow
-                                            .withOpacity(
-                                          Dimens.opa0Dot2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(
-                                            Dimens.size10),
+                                        shadowColor: LoginAppColor.textFormFieldShadow.withOpacity(Dimens.opa0Dot2),
+                                        borderRadius: BorderRadius.circular(Dimens.size10),
                                         child: TextFormField(
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
+                                          autovalidateMode: AutovalidateMode.onUserInteraction,
                                           controller: _email,
-                                          keyboardType:
-                                              TextInputType.emailAddress,
+                                          keyboardType: TextInputType.emailAddress,
                                           cursorColor: LoginAppColor.blackColor,
-                                          style:
-                                              ThemeConfig.textTheme.bodyText1,
+                                          style: ThemeConfig.textTheme.bodyText1,
                                           decoration: InputDecoration(
-                                            hintStyle:
-                                                ThemeConfig.textTheme.subtitle1,
-                                            hintText: tr(
-                                                'login_screen.login_email_hint'),
+                                            hintStyle: ThemeConfig.textTheme.subtitle1,
+                                            hintText: tr('login_screen.login_email_hint'),
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: SizeConfig.screenHeight! *
-                                        Dimens.size0Dot036,
-                                  ),
+                                  SizedBox(height: SizeConfig.screenHeight! * Dimens.size0Dot036),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       CustomTitle(
-                                        title:
-                                            tr('login_screen.login_password'),
-                                        textTheme:
-                                            ThemeConfig.textTheme.headline6,
+                                        title: tr('login_screen.login_password'),
+                                        textTheme: ThemeConfig.textTheme.headline6,
                                       ),
                                       const SizedBox(height: Dimens.size4),
                                       Material(
                                         elevation: Dimens.size1,
                                         color: LoginAppColor.whiteColor,
-                                        shadowColor: LoginAppColor
-                                            .textFormFieldShadow
-                                            .withOpacity(
-                                          Dimens.opa0Dot2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(
-                                            Dimens.size10),
+                                        shadowColor: LoginAppColor.textFormFieldShadow.withOpacity(Dimens.opa0Dot2),
+                                        borderRadius: BorderRadius.circular(Dimens.size10),
                                         child: TextFormField(
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
+                                          autovalidateMode: AutovalidateMode.onUserInteraction,
                                           controller: _password,
-                                          keyboardType:
-                                              TextInputType.emailAddress,
+                                          keyboardType: TextInputType.emailAddress,
                                           cursorColor: LoginAppColor.blackColor,
-                                          style:
-                                              ThemeConfig.textTheme.bodyText1,
+                                          style: ThemeConfig.textTheme.bodyText1,
                                           obscureText: !data.isShowPass,
                                           decoration: InputDecoration(
                                             suffixIcon: IconButton(
-                                              onPressed: () =>
-                                                  data.showPassword(),
+                                              onPressed: () => data.showPassword(),
                                               icon: Icon(
-                                                data.isShowPass
-                                                    ? Icons.visibility_off
-                                                    : Icons.visibility,
+                                                data.isShowPass ? Icons.visibility_off : Icons.visibility,
                                               ),
                                             ),
-                                            hintStyle:
-                                                ThemeConfig.textTheme.subtitle1,
-                                            hintText: tr(
-                                              'login_screen.login_password_hint',
-                                            ),
+                                            hintStyle: ThemeConfig.textTheme.subtitle1,
+                                            hintText: tr('login_screen.login_password_hint'),
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: SizeConfig.screenHeight! *
-                                        Dimens.size0Dot04,
-                                  ),
+                                  SizedBox(height: SizeConfig.screenHeight! * Dimens.size0Dot04),
                                   Center(
                                     child: InkWell(
                                       onTap: () {},
                                       child: CustomTitle(
-                                        title: tr(
-                                          'login_screen.login_forgot_password',
-                                        ),
-                                        textTheme: ThemeConfig
-                                            .textTheme.bodyText2
-                                            ?.copyWith(
+                                        title: tr('login_screen.login_forgot_password'),
+                                        textTheme: ThemeConfig.textTheme.bodyText2?.copyWith(
                                           color: LoginAppColor.balloonTwoColor,
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: SizeConfig.screenHeight! *
-                                        Dimens.size0Dot04,
-                                  ),
+                                  SizedBox(height: SizeConfig.screenHeight! * Dimens.size0Dot04),
                                   Center(
                                     child: CustomActionButton(
                                       title: tr('login_screen.login_title'),
                                       height: Dimens.size52,
-                                      width: SizeConfig.screenWidth! *
-                                          Dimens.size0Dot66,
-                                      textTheme: ThemeConfig
-                                          .textTheme.bodyText1!
-                                          .copyWith(
+                                      width: SizeConfig.screenWidth! * Dimens.size0Dot66,
+                                      textTheme: ThemeConfig.textTheme.bodyText1!.copyWith(
                                         color: LoginAppColor.whiteColor,
                                       ),
                                       press: () async {
@@ -279,21 +221,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                         );
                                         switch (data.statusAuthentication) {
                                           case ListStatusAuthentication.fail:
-                                            Utils.showToast(
-                                                tr('login_screen.login_fail'));
+                                            Utils.showToast(tr('login_screen.login_fail'));
                                             break;
                                           case ListStatusAuthentication.success:
+                                            if (!mounted) return;
                                             Navigator.pushNamedAndRemoveUntil(
                                               context,
                                               '/category',
                                               (route) => false,
                                             );
                                             break;
-                                          case ListStatusAuthentication
-                                              .wrongEmail:
-                                            Utils.showToast(
-                                              tr('login_screen.wrong_email'),
-                                            );
+                                          case ListStatusAuthentication.wrongEmail:
+                                            Utils.showToast(tr('login_screen.wrong_email'));
                                             break;
                                           case ListStatusAuthentication.logged:
                                             break;
@@ -303,26 +242,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                       },
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: SizeConfig.screenHeight! *
-                                        Dimens.size0Dot045,
-                                  ),
+                                  SizedBox(height: SizeConfig.screenHeight! * Dimens.size0Dot045),
                                   Center(
                                     child: DoNotHaveAccountText(
                                       press: () {},
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: SizeConfig.screenHeight! *
-                                        Dimens.size0Dot045,
-                                  ),
-                                  CustomDividerAndText(
-                                    title: tr('login_screen.sign_in_with'),
-                                  ),
+                                  SizedBox(height: SizeConfig.screenHeight! * Dimens.size0Dot045),
+                                  CustomDividerAndText(title: tr('login_screen.sign_in_with')),
                                   const SizedBox(height: Dimens.size16),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
                                       LoginWithSocialNetworkButton(
                                         title: tr('login_screen.facebook'),

@@ -5,9 +5,7 @@ import '../dependencies/app_dependencies.dart';
 class DBBusiness {
   final _authenticationService = AppDependencies.getIt.get<DBRepository>();
 
-  Future<void> newUser(User user) async =>
-      await _authenticationService.newUser(user);
+  Future<void> newUser(User user) async => await _authenticationService.newUser(user);
 
-  Future<User?> getUser() async =>
-      await _authenticationService.getUser();
+  Future<User?> getUser() async => await _authenticationService.getUser();
 }

@@ -7,9 +7,12 @@ class ShimmerLayout extends StatelessWidget {
   final Decoration? decoration;
   final double? width;
   final double height;
-  const ShimmerLayout(
-      {Key? key, this.width, required this.height, this.decoration})
-      : super(key: key);
+  const ShimmerLayout({
+    Key? key,
+    this.width,
+    required this.height,
+    this.decoration,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
