@@ -24,8 +24,8 @@ class GridViewLoadMoreFilm extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: DimensionConstant.CROSS_AXIS_COUNT_2,
           childAspectRatio: DimensionConstant.CHILD_ASPECT_RATIO_0_DOT_74,
-          crossAxisSpacing: DimensionConstant.CROSS_AXIS_SPACING_8,
-          mainAxisSpacing: DimensionConstant.MAIN_AXIS_SPACING_8,
+          // crossAxisSpacing: DimensionConstant.CROSS_AXIS_SPACING_8,
+          // mainAxisSpacing: DimensionConstant.MAIN_AXIS_SPACING_8,
         ),
         itemCount: resList.length + 2,
         itemBuilder: (context, index) => (index >= resList.length)

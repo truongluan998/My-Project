@@ -21,8 +21,8 @@ class GridViewLoadMoreArtists extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: DimensionConstant.CROSS_AXIS_COUNT_3,
           childAspectRatio: DimensionConstant.CHILD_ASPECT_RATIO_0_DOT_47,
-          crossAxisSpacing: DimensionConstant.CROSS_AXIS_SPACING_8,
-          mainAxisSpacing: DimensionConstant.MAIN_AXIS_SPACING_8,
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
         ),
         controller: scrollController,
         itemCount: resList.length + 3,

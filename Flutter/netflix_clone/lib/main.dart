@@ -37,15 +37,15 @@ Future main() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then(
     (_) {
-      if (kIsWeb) {
-        // initialiaze the facebook javascript SDK
-        FacebookAuth.instance.webInitialize(
-          appId: '415798283599016',
-          cookie: true,
-          xfbml: true,
-          version: 'v11.0',
-        );
-      }
+      // if (kIsWeb) {
+      //   // initialiaze the facebook javascript SDK
+      //   FacebookAuth.instance.webInitialize(
+      //     appId: '415798283599016',
+      //     cookie: true,
+      //     xfbml: true,
+      //     version: 'v11.0',
+      //   );
+      // }
       runApp(const MyApp());
     },
   );

@@ -26,7 +26,7 @@ class AuthenticationService extends AuthenticationRepository {
     try {
       if (email != null &&
           password != null &&
-          (email == 'concung@gmail.com' && password == 'concung123')) {
+          (email == 'demo@gmail.com' && password == 'demo123')) {
         final user = User(1, email, password, 'access_token');
         return user;
       } else {

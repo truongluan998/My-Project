@@ -131,7 +131,8 @@ class AuthenticationBloc
               ),
             );
           }
-        } on Exception catch (_) {
+        } on Exception catch (e) {
+          print(e);
           emit(
             AuthenticationFailureState(
               message: 'Something wrong! Try again',

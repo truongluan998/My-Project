@@ -77,25 +77,15 @@ class _PlayTrailerState extends State<PlayTrailer> with AfterLayoutMixin {
               _initialVideoId = state.trailerOfFilm!.results!.isNotEmpty
                   ? state.trailerOfFilm!.results![0].key ?? ''
                   : '';
-              _youtubePlayerController = YoutubePlayerController(
-                initialVideoId: YoutubePlayerController.convertUrlToId(
-                      'https://www.youtube.com/watch?v=$_initialVideoId',
-                    ) ??
-                    '',
-                params: const YoutubePlayerParams(
-                  color: 'transparent',
-                  strictRelatedVideos: true,
-                  showFullscreenButton: true,
-                ),
-              );
-              return SizedBox(
+              _youtubePlayerController = YoutubePlayerController.fromVideoId(
+              videoId: 'https://www.youtube.com/watch?v=$_initialVideoId',
+            );
+            return SizedBox(
                 width: double.infinity,
                 height: double.infinity,
-                child: YoutubePlayerControllerProvider(
+                child: YoutubePlayer(
                   controller: _youtubePlayerController,
-                  child: YoutubePlayerIFrame(
-                    controller: _youtubePlayerController,
-                  ),
+                  aspectRatio: 16 / 9,
                 ),
               );
             }
