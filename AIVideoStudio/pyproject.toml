@@ -1,0 +1,30 @@
+[project]
+name = "ai-video-studio"
+version = "0.1.0"
+description = "Automated pipeline for illustrated AI story videos: script -> images -> voice -> subtitles -> video -> YouTube"
+requires-python = ">=3.10"
+dependencies = [
+    "anthropic>=2.3",
+    "google-genai>=2.30",
+    "openai>=3.40",
+    "elevenlabs>=2.70",
+    "edge-tts>=7.0",
+    "pillow>=11.0",
+    "pydantic>=2.10",
+    "typer>=0.15",
+    "rich>=13.0",
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+    "google-api-python-client>=2.150",
+    "google-auth-oauthlib>=1.2",
+]
+
+[project.scripts]
+studio = "studio.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["studio"]

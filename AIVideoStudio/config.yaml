@@ -1,0 +1,67 @@
+# ===== "Series bible": nhân vật, phong cách, định dạng kênh =====
+# Đổi các mục này để tạo kênh của riêng bạn. Mọi tập đều dùng chung cấu hình này
+# nên nhân vật và phong cách luôn đồng nhất.
+channel:
+  name: "Pip Barely Ready"
+  language: "English"
+  character: >-
+    Pip, a small stick figure with a perfectly round head, dot eyes, thin black
+    pencil limbs and a bright yellow raincoat. Anxious, talkative, always
+    underprepared, but he never gives up.
+  style_prompt: >-
+    watercolor and pencil illustration, simple stick figure character, white
+    textured paper background, soft muted colors with yellow accents,
+    hand-drawn, clean composition, no text, no letters, no watermark
+  format: |
+    Every episode is a survival countdown. Pip receives a warning (storm,
+    blackout, flood, heat wave, earthquake, wildfire smoke...) and only has a
+    limited time to prepare. Structure:
+    1. Hook in the first sentence: the warning and how much time Pip has.
+    2. Countdown checkpoints (e.g. 60 min, 30 min, 10 min). At each one Pip
+       does something, often gets it wrong first, then the narrator gives the
+       correct, practical tip with concrete numbers.
+    3. A dramatic moment when the disaster hits.
+    4. Pip survives. Recap the key tips in one or two sentences.
+    Tone: warm, a little funny, never preachy. Short sentences for voice-over.
+    Every safety fact must be accurate and match guidance from official
+    sources (FEMA, Red Cross, WHO, CDC, USDA...).
+
+script:
+  model: "claude-opus-5-5"
+  effort: "high"          # low | medium | high | xhigh | max
+  target_minutes: 3       # ~150 từ/phút
+  scenes: 14
+
+images:
+  provider: "gemini"      # gemini | openai | placeholder (miễn phí, để test)
+  gemini_model: "gemini-2.5-flash-image"
+  openai_model: "gpt-image-1"
+  # Ảnh nhân vật chuẩn. Để trống thì ảnh cảnh 1 sẽ được dùng làm ảnh tham chiếu.
+  character_reference: ""
+
+voice:
+  provider: "edge"        # edge (miễn phí) | elevenlabs | silent (để test)
+  edge_voice: "en-US-AndrewNeural"
+  edge_rate: "+0%"
+  elevenlabs_voice_id: "JBFqnCBsd6RMkjVDRZzb"
+  elevenlabs_model: "eleven_multilingual_v2"
+  pause_after_scene: 0.4  # giây nghỉ giữa các cảnh
+
+video:
+  width: 1920
+  height: 1080
+  fps: 30
+  zoom: 1.12              # mức zoom chậm (hiệu ứng Ken Burns)
+  subtitles: true
+  font: "Inter"           # font cho phụ đề (phải có trong máy)
+  music_dir: "assets/music"   # bỏ file mp3 vào đây, mỗi video chọn ngẫu nhiên 1 bài
+  music_volume: 0.18
+
+thumbnail:
+  font_file: ""           # đường dẫn .ttf/.otf đậm; trống = tự tìm
+  scene: 0                # dùng ảnh của cảnh nào làm nền
+
+youtube:
+  privacy: "private"      # private | unlisted | public
+  category_id: "27"       # 27 = Education
+  made_for_kids: false

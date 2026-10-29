@@ -1,0 +1,15 @@
+{
+  "title": "The Power Goes Out for 3 Days. Pip Has 1 Hour.",
+  "description": "A storm is coming and the power could be out for three days. Pip has one hour to get ready, and he gets almost everything wrong first.\n\nWhat you'll learn:\n- Store about 4 liters (1 gallon) of water per person per day\n- A closed fridge keeps food cold for about 4 hours, a full freezer about 48 hours\n- Use flashlights, not candles\n- Never run a generator indoors or in a garage",
+  "tags": ["survival", "power outage", "blackout", "emergency preparedness", "storm prep", "animated story", "survival tips", "stickman"],
+  "thumbnail_text": "1 HOUR LEFT",
+  "sources": ["FEMA Ready.gov - Power Outages", "USDA - Food Safety During Power Outage", "CDC - Carbon Monoxide Poisoning"],
+  "scenes": [
+    {"narration": "Pip's phone buzzes. Storm warning. Power outages expected for up to three days. Pip has one hour.", "image_prompt": "Pip sitting on a sofa staring at a buzzing phone, eyes wide in panic", "on_screen_text": "60:00"},
+    {"narration": "His first thought: snacks. Wrong. The first thing you need is water.", "image_prompt": "Pip proudly holding a giant bag of chips, a big red X drawn over it", "on_screen_text": ""},
+    {"narration": "The rule is about one gallon, roughly four liters, per person, per day. For three days, Pip needs twelve liters.", "image_prompt": "Pip standing next to three large water jugs lined up", "on_screen_text": "12 L"},
+    {"narration": "He fills every bottle he owns, then fills the bathtub. That water isn't for drinking. It's for flushing the toilet.", "image_prompt": "Pip filling a bathtub with water, a toilet nearby", "on_screen_text": ""},
+    {"narration": "Forty five minutes left. Food. Pip opens the fridge and panics.", "image_prompt": "Pip in front of an open fridge, light spilling out, hands on his head", "on_screen_text": "45:00"},
+    {"narration": "Here's the trick. A closed fridge keeps food cold for about four hours. A full freezer, about two days. So keep the doors shut.", "image_prompt": "Pip taping the fridge door closed with a determined face", "on_screen_text": "4h / 48h"}
+  ]
+}

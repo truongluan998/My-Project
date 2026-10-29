@@ -1,0 +1,9 @@
+.env
+output/
+client_secret*.json
+youtube_token.json
+__pycache__/
+*.egg-info/
+.venv/
+assets/music/*
+!assets/music/.gitkeep
