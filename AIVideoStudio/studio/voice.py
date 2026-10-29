@@ -62,6 +62,20 @@ def _elevenlabs(cfg: Config, text: str, path: Path, previous_text: str = "", nex
     return words
 
 
+def _festival(cfg: Config, text: str, path: Path, **_) -> Words:
+    """Offline English voice (apt install festival festvox-us-slt-hts). Robotic, but free and needs no network."""
+    import subprocess
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        txt, wav = Path(tmp) / "t.txt", Path(tmp) / "t.wav"
+        txt.write_text(text, encoding="utf-8")
+        subprocess.run(["text2wave", "-eval", f"({cfg.voice.get('festival_voice', 'voice_cmu_us_slt_arctic_hts')})",
+                        str(txt), "-o", str(wav)], check=True, capture_output=True)
+        run(["-i", str(wav), "-ar", "44100", "-ac", "2", "-c:a", "libmp3lame", "-q:a", "2", str(path)])
+    return None
+
+
 def _silent(cfg: Config, text: str, path: Path, **_) -> Words:
     """Silence lasting roughly as long as the text would take to read (for free test runs)."""
     seconds = max(2.0, len(text.split()) / 2.5)
@@ -81,7 +95,7 @@ def estimate_words(text: str, seconds: float) -> list[dict]:
     return words
 
 
-PROVIDERS = {"edge": _edge, "elevenlabs": _elevenlabs, "silent": _silent}
+PROVIDERS = {"edge": _edge, "elevenlabs": _elevenlabs, "festival": _festival, "silent": _silent}
 
 
 def generate_voice(cfg: Config, episode: Episode, out_dir: Path, provider: str, log=print) -> list[Path]:

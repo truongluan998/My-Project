@@ -46,7 +46,7 @@ images:
   character_reference: ""
 
 voice:
-  provider: "edge"        # edge (miễn phí) | elevenlabs | silent (để test)
+  provider: "edge"        # edge (miễn phí) | elevenlabs | festival (offline, giọng máy) | silent (để test)
   edge_voice: "en-US-AndrewNeural"
   edge_rate: "+0%"
   elevenlabs_voice_id: "JBFqnCBsd6RMkjVDRZzb"

@@ -20,7 +20,7 @@ Mục tiêu dài hạn là quy trình **tự động hoàn toàn**: chủ đề 
 studio make "<chủ đề>"
   1. script_writer.py   Claude (anthropic SDK, claude-opus-5-5) → models.Episode (JSON có cấu trúc)
   2. images.py          higgsfield (mặc định) | gemini | openai | placeholder → images/scene_XX.png 1920x1080
-  3. voice.py           edge (mặc định, miễn phí) | elevenlabs | silent → audio/scene_XX.mp3 + scene_XX.words.json
+  3. voice.py           edge (mặc định, miễn phí) | elevenlabs | festival (offline) | silent → audio/scene_XX.mp3 + scene_XX.words.json
   4. renderer_remotion  props.json → `npx remotion render` (remotion/) → ffmpeg loudnorm -14 LUFS → video.mp4
      (hoặc video.py + subtitles.py: renderer ffmpeg dự phòng, ASS subtitles + zoompan)
   5. thumbnail.py       Pillow → thumbnail.jpg 1280x720
@@ -101,6 +101,10 @@ export REMOTION_BROWSER_EXECUTABLE=/opt/pw-browsers/chromium-1243/chrome-linux64
 /tmp/venv/bin/studio build output/test --images placeholder --voice silent --renderer remotion
 /tmp/venv/bin/studio build output/test --renderer ffmpeg   # kiểm tra renderer dự phòng
 ```
+
+Giọng offline trong sandbox: `apt-get install -y festival festvox-us-slt-hts`, rồi dùng `--voice festival`.
+Video demo đầu tiên (`output/demo-power-outage`, không commit) được làm như sau: Claude tự viết kịch bản, ảnh do Claude vẽ bằng SVG
+(script nằm trong scratchpad của phiên, không nằm trong repo), giọng festival, nhạc nền tự tổng hợp bằng ffmpeg.
 
 Sandbox chặn youtube.com, docs.higgsfield.ai và speech.platform.bing.com. Được phép truy cập: npm, pypi, fonts.gstatic.com.
 Remotion dựng video 42 giây mất khoảng 3 phút trong sandbox.

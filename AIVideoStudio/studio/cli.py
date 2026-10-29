@@ -17,7 +17,7 @@ console = Console()
 OUTPUT = ROOT / "output"
 
 ImagesOpt = typer.Option(None, "--images", help="gemini | openai | placeholder (ghi đè config.yaml)")
-VoiceOpt = typer.Option(None, "--voice", help="edge | elevenlabs | silent (ghi đè config.yaml)")
+VoiceOpt = typer.Option(None, "--voice", help="edge | elevenlabs | festival | silent (ghi đè config.yaml)")
 RendererOpt = typer.Option(None, "--renderer", help="remotion | ffmpeg (ghi đè config.yaml)")
 
 
