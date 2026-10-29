@@ -33,7 +33,13 @@ script:
   scenes: 14
 
 images:
-  provider: "gemini"      # gemini | openai | placeholder (miễn phí, để test)
+  provider: "higgsfield"  # higgsfield | gemini | openai | placeholder (miễn phí, để test)
+  higgsfield_model: "bytedance/seedream/v4/text-to-image"
+  higgsfield_resolution: "2K"
+  # Model nhận ảnh tham chiếu để giữ nhân vật đồng nhất: lấy ID và tên tham số
+  # trong danh mục model trên cloud.higgsfield.ai. Để trống = chỉ dùng prompt.
+  higgsfield_reference_model: ""
+  higgsfield_reference_arg: "image_urls"
   gemini_model: "gemini-2.5-flash-image"
   openai_model: "gpt-image-1"
   # Ảnh nhân vật chuẩn. Để trống thì ảnh cảnh 1 sẽ được dùng làm ảnh tham chiếu.
@@ -48,10 +54,12 @@ voice:
   pause_after_scene: 0.4  # giây nghỉ giữa các cảnh
 
 video:
+  renderer: "remotion"    # remotion (hiệu ứng động, cần Node.js) | ffmpeg (nhanh, đơn giản)
   width: 1920
   height: 1080
   fps: 30
   zoom: 1.12              # mức zoom chậm (hiệu ứng Ken Burns)
+  transition_frames: 12   # độ dài chuyển cảnh mờ dần (chỉ Remotion)
   subtitles: true
   font: "Inter"           # font cho phụ đề (phải có trong máy)
   music_dir: "assets/music"   # bỏ file mp3 vào đây, mỗi video chọn ngẫu nhiên 1 bài

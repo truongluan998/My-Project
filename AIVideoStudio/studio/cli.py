@@ -18,6 +18,7 @@ OUTPUT = ROOT / "output"
 
 ImagesOpt = typer.Option(None, "--images", help="gemini | openai | placeholder (ghi đè config.yaml)")
 VoiceOpt = typer.Option(None, "--voice", help="edge | elevenlabs | silent (ghi đè config.yaml)")
+RendererOpt = typer.Option(None, "--renderer", help="remotion | ffmpeg (ghi đè config.yaml)")
 
 
 def _log(msg: str) -> None:
@@ -42,26 +43,24 @@ def _new_script(topic: str) -> Path:
     return ep_dir
 
 
-def _build(ep_dir: Path, images: Optional[str], voice: Optional[str]) -> Path:
-    from .ffmpeg_utils import duration
+def _prepare(ep_dir: Path, images: Optional[str], voice: Optional[str]):
     from .images import generate_images
-    from .subtitles import write_ass
-    from .thumbnail import make_thumbnail
-    from .video import assemble, render_scene
     from .voice import generate_voice
 
     cfg = load_config()
     episode = Episode.load(ep_dir / "script.json")
-    started = time.time()
-
     console.print(f"[bold]2/5 Tạo ảnh[/bold] ({images or cfg.images.provider})")
     image_paths = generate_images(cfg, episode, ep_dir / "images", images or cfg.images.provider, _log)
-
     console.print(f"[bold]3/5 Giọng đọc[/bold] ({voice or cfg.voice.provider})")
     voice_paths = generate_voice(cfg, episode, ep_dir / "audio", voice or cfg.voice.provider, _log)
-    durations = [duration(p) for p in voice_paths]
+    return cfg, episode, image_paths, voice_paths
 
-    console.print("[bold]4/5 Dựng video[/bold]")
+
+def _render_ffmpeg(cfg, episode: Episode, ep_dir: Path, image_paths: list[Path], voice_paths: list[Path], final: Path) -> None:
+    from .ffmpeg_utils import duration
+    from .subtitles import write_ass
+    from .video import assemble, render_scene
+
     clips_dir = ep_dir / "clips"
     clips_dir.mkdir(exist_ok=True)
     clips = []
@@ -73,9 +72,26 @@ def _build(ep_dir: Path, images: Optional[str], voice: Optional[str]) -> Path:
             render_scene(cfg, i, img, aud, clip)
         clips.append(clip)
     subs = ep_dir / "subtitles.ass"
-    write_ass(cfg, episode, durations, subs)
-    final = ep_dir / "video.mp4"
+    write_ass(cfg, episode, [duration(p) for p in voice_paths], subs)
     assemble(cfg, ep_dir, clips, subs, final)
+
+
+def _build(ep_dir: Path, images: Optional[str], voice: Optional[str], renderer: Optional[str] = None) -> Path:
+    from .ffmpeg_utils import duration
+    from .thumbnail import make_thumbnail
+
+    started = time.time()
+    cfg, episode, image_paths, voice_paths = _prepare(ep_dir, images, voice)
+
+    renderer = renderer or cfg.video.renderer
+    console.print(f"[bold]4/5 Dựng video[/bold] ({renderer})")
+    final = ep_dir / "video.mp4"
+    if renderer == "remotion":
+        from .renderer_remotion import render
+
+        render(cfg, episode, ep_dir, image_paths, voice_paths, final)
+    else:
+        _render_ffmpeg(cfg, episode, ep_dir, image_paths, voice_paths, final)
 
     console.print("[bold]5/5 Thumbnail[/bold]")
     make_thumbnail(cfg, image_paths[cfg.thumbnail.scene], episode.thumbnail_text, ep_dir / "thumbnail.jpg")
@@ -103,9 +119,20 @@ def script(topic: str):
 
 
 @app.command()
-def build(episode_dir: Path, images: Optional[str] = ImagesOpt, voice: Optional[str] = VoiceOpt):
+def build(episode_dir: Path, images: Optional[str] = ImagesOpt, voice: Optional[str] = VoiceOpt,
+          renderer: Optional[str] = RendererOpt):
     """Dựng video từ script.json có sẵn. Chạy lại an toàn: chỉ làm lại phần còn thiếu."""
-    _build(episode_dir.resolve(), images, voice)
+    _build(episode_dir.resolve(), images, voice, renderer)
+
+
+@app.command()
+def preview(episode_dir: Path, images: Optional[str] = ImagesOpt, voice: Optional[str] = VoiceOpt):
+    """Mở Remotion Studio trên trình duyệt để xem trước và chỉnh hiệu ứng trước khi xuất video."""
+    from .renderer_remotion import preview as remotion_preview
+
+    ep_dir = episode_dir.resolve()
+    cfg, episode, image_paths, voice_paths = _prepare(ep_dir, images, voice)
+    remotion_preview(cfg, episode, ep_dir, image_paths, voice_paths)
 
 
 @app.command()

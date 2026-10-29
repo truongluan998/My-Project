@@ -7,3 +7,4 @@ __pycache__/
 .venv/
 assets/music/*
 !assets/music/.gitkeep
+node_modules/

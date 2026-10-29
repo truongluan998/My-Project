@@ -5,6 +5,7 @@ description = "Automated pipeline for illustrated AI story videos: script -> ima
 requires-python = ">=3.10"
 dependencies = [
     "anthropic>=2.3",
+    "higgsfield-client>=0.2",
     "google-genai>=2.30",
     "openai>=3.40",
     "elevenlabs>=2.70",

@@ -36,7 +36,7 @@ def render_scene(cfg: Config, index: int, image: Path, voice: Path, out: Path) -
     ])
 
 
-def _pick_music(cfg: Config) -> Path | None:
+def pick_music(cfg: Config) -> Path | None:
     folder = resolve(cfg.video.music_dir)
     tracks = [p for p in folder.glob("*") if p.suffix.lower() in {".mp3", ".wav", ".m4a", ".ogg"}] if folder.exists() else []
     return random.choice(tracks) if tracks else None
@@ -49,7 +49,7 @@ def assemble(cfg: Config, ep_dir: Path, clips: list[Path], subtitles: Path | Non
     run(["-f", "concat", "-safe", "0", "-i", concat_list.name, "-c", "copy", body.name], cwd=ep_dir)
 
     args = ["-i", body.name]
-    music = _pick_music(cfg)
+    music = pick_music(cfg)
     if music:
         args += ["-stream_loop", "-1", "-i", str(music.resolve())]
         # Music ducks under the narration (sidechain), then everything is normalized for YouTube (-14 LUFS).

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import io
+import os
 import textwrap
 from pathlib import Path
 
@@ -58,6 +59,32 @@ def _openai(cfg: Config, prompt: str, reference: Path | None) -> Image.Image:
     return Image.open(io.BytesIO(base64.b64decode(result.data[0].b64_json)))
 
 
+_uploaded_refs: dict[Path, str] = {}
+
+
+def _higgsfield(cfg: Config, prompt: str, reference: Path | None) -> Image.Image:
+    import urllib.request
+
+    import higgsfield_client
+
+    hf = cfg.images
+    if not (os.environ.get("HF_KEY") or (os.environ.get("HF_API_KEY") and os.environ.get("HF_API_SECRET"))):
+        require_env("HF_KEY")
+    arguments = {"prompt": prompt, "resolution": hf.higgsfield_resolution, "aspect_ratio": "16:9"}
+    model = hf.higgsfield_model
+    if reference and hf.higgsfield_reference_model:
+        if reference not in _uploaded_refs:
+            _uploaded_refs[reference] = higgsfield_client.upload_file(str(reference))
+        model = hf.higgsfield_reference_model
+        arguments[hf.higgsfield_reference_arg] = [_uploaded_refs[reference]]
+    result = higgsfield_client.subscribe(model, arguments=arguments)
+    images = (result or {}).get("images") or []
+    if not images:
+        raise RuntimeError(f"Higgsfield không trả về ảnh: {result}")
+    with urllib.request.urlopen(images[0]["url"], timeout=120) as r:
+        return Image.open(io.BytesIO(r.read()))
+
+
 def _placeholder(cfg: Config, prompt: str, reference: Path | None, index: int = 0) -> Image.Image:
     """Free stand-in image so the whole pipeline can be tested without API keys."""
     img = Image.new("RGB", (cfg.video.width, cfg.video.height), (246, 241, 230))
@@ -73,7 +100,7 @@ def _placeholder(cfg: Config, prompt: str, reference: Path | None, index: int = 
     return img
 
 
-PROVIDERS = {"gemini": _gemini, "openai": _openai, "placeholder": _placeholder}
+PROVIDERS = {"higgsfield": _higgsfield, "gemini": _gemini, "openai": _openai, "placeholder": _placeholder}
 
 
 def generate_images(cfg: Config, episode: Episode, out_dir: Path, provider: str, log=print) -> list[Path]:
